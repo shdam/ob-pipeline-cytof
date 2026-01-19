@@ -1,7 +1,7 @@
 id: cytof_benchmmark_exercise
 description: Benchmark of different clustering algorithms for benchmark phd course.
 version: 0.1
-benchmarker: "Andrea Sonnenholzner, Frederik Kirk, Helene Wegener, Javier Herranz"
+benchmarker: Andrea Sonnenholzner, Frederik Kirk, Helene Wegener, Javier Herranz
 storage: http://omnibenchmark.org:9000
 benchmark_yaml_spec: 0.04
 storage_api: S3
@@ -9,133 +9,98 @@ storage_bucket_name: clusteringexampleconda
 software_backend: conda
 software_environments:
   py:
-    description: "clustbench on py3.12.6"
+    description: clustbench on py3.12.6
     conda: envs/py.yml
     envmodule: py
   py-old:
-    description: "clustbench on py3.12.6"
+    description: clustbench on py3.12.6
     conda: envs/py-old.yml
     envmodule: py-old
   cran:
-    description: "CRAN R environment"
+    description: CRAN R environment
     conda: envs/cran.yml
     envmodule: cran
   cyanno:
-    description: "CyAnno module environment"
+    description: CyAnno module environment
     conda: envs/cyanno_env.yml
     envmodule: cyanno
-
-# metric_collectors:
-#   - id: plotting
-#     name: "Single-backend metric collector."
-#     software_environment: "cran"
-#     repository:
-#       url: https://github.com/imallona/clustering_report
-#       commit: bbb9d56
-#     inputs:
-#       - metrics.scores
-#     outputs:
-#       - id: plotting.html
-#         path: "{input}/{name}/plotting_report.html"
 stages:
-  ## clustbench data ##########################################################
-
-  - id: data
-    modules:
-      - id: data_import
-        name: "CyTOF dataset from this place http://flowrepository.org/experiments/817/download_ziped_files"
-        software_environment: "py"
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-data
-          commit: 9a115ab
-        parameters:
-          - values: ["--dataset_name", "Levine_13dim", "--transformed", "false"]
-          # - values: ["--dataset_name", "Levine_13dim", "--transformed", "true"]
-          # - values: ["--dataset_name", "Levine_32dim", "--transformed", "false"]
-          # - values: ["--dataset_name", "Levine_32dim", "--transformed", "true"]
-          # - values: ["--dataset_name", "Mossman_rare", "--transformed", "false"]
-          # - values: ["--dataset_name", "Mossman_rare", "--transformed", "true"]
-          # - values: ["--dataset_name", "Nilsson_rare", "--transformed", "false"]
-          # - values: ["--dataset_name", "Nilsson_rare", "--transformed", "true"]
-          # - values: ["--dataset_name", "Samusik_01", "--transformed", "false"]
-          # - values: ["--dataset_name", "Samusik_01", "--transformed", "true"]
-          # - values: ["--dataset_name", "", "--transformed", "false"] #Template
-    outputs:
-      - id: data.raw
-        path: "{input}/{stage}/{module}/{params}/{dataset}.data.gz"
-      - id: data.labels
-        path: "{input}/{stage}/{module}/{params}/{dataset}.input_labels.gz"
-  - id: preprocessing
-    modules:
-      - id: data_preprocessing
-        name: "Data preprocessing for CyTOF datasets"
-        software_environment: "py"
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-preprocessing
-          commit: 4036e89
-        parameters:
-
-    inputs:
-      - entries:
-          - data.raw
-          - data.labels
-    outputs:
-      - id: data.matrix
-        path: "{input}/{stage}/{module}/{params}/{dataset}.matrix.gz"
-      - id: data.true_labels
-        path: "{input}/{stage}/{module}/{params}/{dataset}.true_labels.gz"
-
-  - id: analysis
-    inputs:
-      - entries:
-          - data.matrix
-          - data.true_labels
-
-    modules:
-
-      - id: dgcytof
-        name: "DG-CyTOF"
-        software_environment: py
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-dgcytof
-          commit: d5d2e6f
-        parameters: []
-
-      - id: cyanno
-        name: "CyAnno annotator"
-        software_environment: cyanno
-        repository:
-          url: https://github.com/JavierHdCKU/ob-pipeline-cyanno
-          commit: d45303799244b31e99a9ef4d8b16bc8fbff8befa
-        parameters: []
-
-    outputs:
-      - id: analysis.prediction
-        path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.txt"
-
-  - id: metrics
-    modules:
-      - id: flow_metrics
-        name: "benchmark metrics for flow/cytof data"
-        software_environment: "py"
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-metrics
-          commit: cd90760
-        parameters:
-          - values: ["--metric", "all"]
-        #  - values: ["--metric", "accuracy"]
-        #  - values: ["--metric", "precision"]
-        #  - values: ["--metric", "recall"]
-        #  - values: ["--metric", "f1"]
-        #  - values: ["--metric", "f1_score"]
-        #  - values: ["--metric", "runtime"]
-        #  - values: ["--metric", "overlap"]
-        #  - values: ["--metric", "scalability"]
-      #  - values: ["--metric", ""] #Template: Add parameters
-    inputs:
-      - entries:
-          - analysis.prediction
-          - data.true_labels
-    outputs:
-      - id: metrics.scores
-        path: "{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz"
+- id: data
+  modules:
+  - id: data_import
+    name: CyTOF dataset from this place http://flowrepository.org/experiments/817/download_ziped_files
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-data
+      commit: 553727df18bacefb107fd9299136550a159ac1ce
+    parameters:
+    - values:
+      - --dataset_name
+      - Levine_13dim
+      - --transformed
+      - 'false'
+  outputs:
+  - id: data.raw
+    path: '{input}/{stage}/{module}/{params}/{dataset}.data.gz'
+  - id: data.labels
+    path: '{input}/{stage}/{module}/{params}/{dataset}.input_labels.gz'
+- id: preprocessing
+  modules:
+  - id: data_preprocessing
+    name: Data preprocessing for CyTOF datasets
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-preprocessing
+      commit: 20f01c5c152088714a3f2576d4770fddf20bccc2
+    parameters: null
+  inputs:
+  - entries:
+    - data.raw
+    - data.labels
+  outputs:
+  - id: data.matrix
+    path: '{input}/{stage}/{module}/{params}/{dataset}.matrix.gz'
+  - id: data.true_labels
+    path: '{input}/{stage}/{module}/{params}/{dataset}.true_labels.gz'
+- id: analysis
+  inputs:
+  - entries:
+    - data.matrix
+    - data.true_labels
+  modules:
+  - id: dgcytof
+    name: DG-CyTOF
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-dgcytof
+      commit: d5d2e6f9e7e3f704fd61f3fc2334c22b0b207507
+    parameters: []
+  - id: cyanno
+    name: CyAnno annotator
+    software_environment: cyanno
+    repository:
+      url: https://github.com/JavierHdCKU/ob-pipeline-cyanno
+      commit: d45303799244b31e99a9ef4d8b16bc8fbff8befa
+    parameters: []
+  outputs:
+  - id: analysis.prediction
+    path: '{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.txt'
+- id: metrics
+  modules:
+  - id: flow_metrics
+    name: benchmark metrics for flow/cytof data
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-metrics
+      commit: cd90760596139d335f025fa3126c1378e8ddbee6
+    parameters:
+    - values:
+      - --metric
+      - all
+  inputs:
+  - entries:
+    - analysis.prediction
+    - data.true_labels
+  outputs:
+  - id: metrics.scores
+    path: '{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz'
