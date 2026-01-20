@@ -15,9 +15,11 @@ dependencies:
   - conda-forge::scikit-learn=1.2.2
   - conda-forge::scikit-plot=0.3.7
   - conda-forge::scikit-bio=0.5.8
-  - conda-forge::pytorch=2.0.0
-  - conda-forge::torchvision=0.15.1
   - conda-forge::tensorboard=2.13.0
   - conda-forge::isodate
   - conda-forge::pydantic
   - conda-forge::pyyaml
+  - conda-forge::pip
+  - pip:
+      - "torch==2.0.1"
+      - "torchvision==0.15.2"
