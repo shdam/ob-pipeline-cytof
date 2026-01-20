@@ -63,15 +63,13 @@ stages:
     - data.labels
   outputs:
   - id: data.train_matrix
-    path: '{input}/{stage}/{module}/{params}/{dataset}.train.matrix.csv.gz'
+    path: '{input}/{stage}/{module}/{params}/{dataset}.matrix.training.gz'
   - id: data.train_labels
-    path: '{input}/{stage}/{module}/{params}/{dataset}.train.labels.csv.gz'
+    path: '{input}/{stage}/{module}/{params}/{dataset}.true_labels.training.gz'
   - id: data.test_matrix
-    path: '{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz'
+    path: '{input}/{stage}/{module}/{params}/{dataset}.matrix.gz'
   - id: data.test_labels
-    path: '{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz'
-  - id: data.label_key
-    path: '{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz'
+    path: '{input}/{stage}/{module}/{params}/{dataset}.true_labels.gz'
 - id: analysis
   inputs:
   - entries:
