@@ -36,7 +36,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-data
-      commit: 702e8f8ba4fb468172e3617861ed8ec01664fd60
+      commit: 553727df18bacefb107fd9299136550a159ac1ce
     parameters:
     - values:
       - --dataset_name
@@ -55,7 +55,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-preprocessing
-      commit: 07fac9cf0ca4418ab3410974c18be9631a37a0c3
+      commit: 20f01c5c152088714a3f2576d4770fddf20bccc2
     parameters:
     - values:
       - --test-sample-limit
@@ -87,7 +87,7 @@ stages:
     software_environment: dgcytof
     repository:
       url: https://github.com/kaae-2/ob-pipeline-dgcytof
-      commit: 7c720e3006792c06658effe2a3990e8d639bf8e0
+      commit: d5d2e6f9e7e3f704fd61f3fc2334c22b0b207507
     parameters: []
   outputs:
   - id: analysis.prediction
@@ -99,7 +99,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-metrics
-      commit: f4d87b35f96b21c36c6910603ba08cd627f9652e
+      commit: cd90760596139d335f025fa3126c1378e8ddbee6
     parameters:
     - values:
       - --metric
