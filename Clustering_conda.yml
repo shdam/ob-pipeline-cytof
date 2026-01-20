@@ -66,19 +66,21 @@ stages:
     - data.labels
   outputs:
   - id: data.train_matrix
-    path: '{input}/{stage}/{module}/{params}/{dataset}.matrix.training.gz'
+    path: '{input}/{stage}/{module}/{params}/{dataset}.train.matrix.csv.gz'
   - id: data.train_labels
-    path: '{input}/{stage}/{module}/{params}/{dataset}.true_labels.training.gz'
-  - id: data.test_matrix
-    path: '{input}/{stage}/{module}/{params}/{dataset}.matrix.gz'
-  - id: data.true_labels
-    path: '{input}/{stage}/{module}/{params}/{dataset}.true_labels.gz'
+    path: '{input}/{stage}/{module}/{params}/{dataset}.train.labels.csv.gz'
+  - id: data.test_matrices
+    path: '{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz'
+  - id: data.test_labels
+    path: '{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz'
+  - id: data.label_key
+    path: '{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz'
 - id: analysis
   inputs:
   - entries:
     - data.train_matrix
     - data.train_labels
-    - data.test_matrix
+    - data.test_matrices
   modules:
   - id: dgcytof
     name: DG-CyTOF
@@ -105,7 +107,7 @@ stages:
   inputs:
   - entries:
     - analysis.prediction
-    - data.true_labels
+    - data.test_labels
   outputs:
   - id: metrics.scores
     path: '{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz'
