@@ -68,7 +68,7 @@ stages:
     path: '{input}/{stage}/{module}/{params}/{dataset}.true_labels.training.gz'
   - id: data.test_matrix
     path: '{input}/{stage}/{module}/{params}/{dataset}.matrix.gz'
-  - id: data.test_labels
+  - id: data.true_labels
     path: '{input}/{stage}/{module}/{params}/{dataset}.true_labels.gz'
 - id: analysis
   inputs:
@@ -82,7 +82,7 @@ stages:
     software_environment: dgcytof
     repository:
       url: https://github.com/kaae-2/ob-pipeline-dgcytof
-      commit: d5d2e6f9e7e3f704fd61f3fc2334c22b0b207507
+      commit: 7f924a02de7118e0cb53df5acc894cc2458a8a06
     parameters: []
   outputs:
   - id: analysis.prediction
@@ -94,7 +94,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-metrics
-      commit: cd90760596139d335f025fa3126c1378e8ddbee6
+      commit: 0ce580659d7f56b426e106fb3e44bc0565f34681
     parameters:
     - values:
       - --metric
@@ -102,7 +102,7 @@ stages:
   inputs:
   - entries:
     - analysis.prediction
-    - data.test_labels
+    - data.true_labels
   outputs:
   - id: metrics.scores
     path: '{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz'
