@@ -56,7 +56,10 @@ stages:
         repository:
           url: https://github.com/kaae-2/ob-pipeline-preprocessing
           commit: 20f01c5c152088714a3f2576d4770fddf20bccc2
-        parameters: []
+        parameters:
+          - values:
+              - --test-sample-limit
+              - "5"
     inputs:
       - entries:
           - data.raw
