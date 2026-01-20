@@ -24,6 +24,10 @@ software_environments:
     description: CyAnno module environment
     conda: envs/cyanno_env.yml
     envmodule: cyanno
+  dgcytof:
+    description: DG-CyTOF legacy environment
+    conda: envs/dgcytof.yml
+    envmodule: dgcytof
 stages:
 - id: data
   modules:
@@ -32,7 +36,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-data
-      commit: 553727df18bacefb107fd9299136550a159ac1ce
+      commit: 702e8f8ba4fb468172e3617861ed8ec01664fd60
     parameters:
     - values:
       - --dataset_name
@@ -51,40 +55,43 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-preprocessing
-      commit: 20f01c5c152088714a3f2576d4770fddf20bccc2
-    parameters: null
+      commit: 07fac9cf0ca4418ab3410974c18be9631a37a0c3
+    parameters:
+    - values:
+      - --test-sample-limit
+      - 5
   inputs:
   - entries:
     - data.raw
     - data.labels
   outputs:
-  - id: data.matrix
-    path: '{input}/{stage}/{module}/{params}/{dataset}.matrix.gz'
-  - id: data.true_labels
-    path: '{input}/{stage}/{module}/{params}/{dataset}.true_labels.gz'
+  - id: data.train_matrix
+    path: '{input}/{stage}/{module}/{params}/{dataset}.train.matrix.csv.gz'
+  - id: data.train_labels
+    path: '{input}/{stage}/{module}/{params}/{dataset}.train.labels.csv.gz'
+  - id: data.test_matrix
+    path: '{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz'
+  - id: data.test_labels
+    path: '{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz'
+  - id: data.label_key
+    path: '{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz'
 - id: analysis
   inputs:
   - entries:
-    - data.matrix
-    - data.true_labels
+    - data.train_matrix
+    - data.train_labels
+    - data.test_matrix
   modules:
   - id: dgcytof
     name: DG-CyTOF
-    software_environment: py
+    software_environment: dgcytof
     repository:
       url: https://github.com/kaae-2/ob-pipeline-dgcytof
-      commit: d5d2e6f9e7e3f704fd61f3fc2334c22b0b207507
-    parameters: []
-  - id: cyanno
-    name: CyAnno annotator
-    software_environment: cyanno
-    repository:
-      url: https://github.com/JavierHdCKU/ob-pipeline-cyanno
-      commit: d45303799244b31e99a9ef4d8b16bc8fbff8befa
+      commit: 7c720e3006792c06658effe2a3990e8d639bf8e0
     parameters: []
   outputs:
   - id: analysis.prediction
-    path: '{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.txt'
+    path: '{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz'
 - id: metrics
   modules:
   - id: flow_metrics
@@ -92,7 +99,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-metrics
-      commit: cd90760596139d335f025fa3126c1378e8ddbee6
+      commit: f4d87b35f96b21c36c6910603ba08cd627f9652e
     parameters:
     - values:
       - --metric
@@ -100,7 +107,7 @@ stages:
   inputs:
   - entries:
     - analysis.prediction
-    - data.true_labels
+    - data.test_labels
   outputs:
   - id: metrics.scores
     path: '{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz'
