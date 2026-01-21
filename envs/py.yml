@@ -20,6 +20,7 @@ dependencies:
       - "genieclust==1.1.6"
       - "pandas==2.2.3"
       - "fcsparser==0.2.8"
+      - "zstandard"
       - "seaborn==0.10.1"
       - "matplotlib==3.8.0"
       - "umap-learn==0.4.6"
