@@ -32,7 +32,7 @@ stages:
 - id: data
   modules:
   - id: data_import
-    name: CyTOF dataset from this place http://flowrepository.org/experiments/817/download_ziped_files
+    name: Prepared CyTOF CSV dataset from GitHub prepared folder
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-data
@@ -40,9 +40,7 @@ stages:
     parameters:
     - values:
       - --dataset_name
-      - covid
-      - --transformed
-      - 'false'
+      - FR-FCM-Z2KP_virus_final
   outputs:
   - id: data.raw
     path: '{input}/{stage}/{module}/{params}/{dataset}.data.gz'
