@@ -41,11 +41,15 @@ stages:
     - values:
       - --dataset_name
       - FR-FCM-Z2KP_virus_final
+      - --seed
+      - '42'
   outputs:
   - id: data.raw
     path: '{input}/{stage}/{module}/{params}/{dataset}.data.gz'
-  - id: data.labels
-    path: '{input}/{stage}/{module}/{params}/{dataset}.input_labels.gz'
+  - id: data.attachments
+    path: '{input}/{stage}/{module}/{params}/{dataset}.attachments.gz'
+  - id: data.order
+    path: '{input}/{stage}/{module}/{params}/{dataset}.order.json.gz'
 - id: preprocessing
   modules:
   - id: data_preprocessing
@@ -61,7 +65,8 @@ stages:
   inputs:
   - entries:
     - data.raw
-    - data.labels
+    - data.attachments
+    - data.order
   outputs:
   - id: data.train_matrix
     path: '{input}/{stage}/{module}/{params}/{dataset}.train.matrix.csv.gz'
