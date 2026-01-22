@@ -74,7 +74,7 @@ stages:
     path: '{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz'
   - id: data.train_labels
     path: '{input}/{stage}/{module}/{params}/{dataset}.train.labels.tar.gz'
-  - id: data.test_matrices
+  - id: data.test_matrix
     path: '{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz'
   - id: data.test_labels
     path: '{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz'
@@ -85,7 +85,7 @@ stages:
   - entries:
     - data.train_matrix
     - data.train_labels
-    - data.test_matrices
+    - data.test_matrix
   modules:
   - id: dgcytof
     name: DG-CyTOF
