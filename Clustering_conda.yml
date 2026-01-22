@@ -66,6 +66,11 @@ stages:
       - FR-FCM-Z2KP_virus_final
       - --seed
       - '42'
+    - values:
+      - --dataset_name
+      - FR-FCM-Z238_infection_final
+      - --seed
+      - '42'
   outputs:
   - id: data.raw
     path: '{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz'
