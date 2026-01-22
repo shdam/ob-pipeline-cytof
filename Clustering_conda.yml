@@ -45,7 +45,7 @@ stages:
       - '42'
   outputs:
   - id: data.raw
-    path: '{input}/{stage}/{module}/{params}/{dataset}.data.gz'
+    path: '{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz'
   - id: data.attachments
     path: '{input}/{stage}/{module}/{params}/{dataset}.attachments.gz'
   - id: data.order
@@ -57,7 +57,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-preprocessing
-      commit: 3fd87a021ea93f12af0d16b5483109c05e4f2154
+      commit: 7961de559453eb4161425607cc41c00e6f3402ae
     parameters:
     - values:
       - --test-sample-limit
