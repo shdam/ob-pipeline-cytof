@@ -28,6 +28,24 @@ software_environments:
     description: DG-CyTOF legacy environment
     conda: envs/dgcytof.yml
     envmodule: dgcytof
+  metrics_r:
+    description: Metrics collector R environment
+    conda: envs/metrics_r.yml
+    envmodule: metrics_r
+metric_collectors:
+- id: metrics_report
+  name: Metrics report collector
+  software_environment: metrics_r
+  repository:
+    url: https://github.com/kaae-2/ob-harness.git
+    commit: e9997d1d6f9eb83dd9d20d929e8e517711563779
+  inputs:
+  - metrics.scores
+  outputs:
+  - id: metrics.report
+    path: '{input}/metric_collectors/{module}/{params}/metrics_report.html'
+  - id: metrics.plots
+    path: '{input}/metric_collectors/{module}/{params}/metric_plots.tar.gz'
 stages:
 - id: data
   modules:
