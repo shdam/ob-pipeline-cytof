@@ -37,8 +37,8 @@ metric_collectors:
   name: Metrics report collector
   software_environment: metrics_r
   repository:
-    url: https://github.com/kaae-2/ob-harness.git
-    commit: e9997d1d6f9eb83dd9d20d929e8e517711563779
+    url: https://github.com/kaae-2/ob-metrics-collectors.git
+    commit: 47544f30a311c74dadcc48fcaa7427471aa8fc86
   inputs:
   - metrics.scores
   outputs:
