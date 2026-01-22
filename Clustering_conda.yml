@@ -113,6 +113,7 @@ stages:
   - entries:
     - analysis.prediction
     - data.true_labels
+    - data.label_key
   outputs:
   - id: metrics.scores
     path: '{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz'
