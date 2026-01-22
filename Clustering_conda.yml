@@ -36,7 +36,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-data
-      commit: 2f81dc724404818285b756f62ddd5d491f23fe79
+      commit: 0a7e83200161d1d623f33f70e4fe0b70d33e166c
     parameters:
     - values:
       - --dataset_name
@@ -76,7 +76,7 @@ stages:
     path: '{input}/{stage}/{module}/{params}/{dataset}.train.labels.tar.gz'
   - id: data.test_matrix
     path: '{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz'
-  - id: data.test_labels
+  - id: data.true_labels
     path: '{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz'
   - id: data.label_key
     path: '{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz'
@@ -112,7 +112,7 @@ stages:
   inputs:
   - entries:
     - analysis.prediction
-    - data.test_labels
+    - data.true_labels
   outputs:
   - id: metrics.scores
     path: '{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz'
