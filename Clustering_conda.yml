@@ -65,10 +65,20 @@ stages:
       commit: fa69969d82a9ddb3a41df98433bc65a21adbd3c5
     parameters:
     - values:
-      - --test-sample-limit
-      - '5'
       - --num
       - '1'
+    - values:
+      - --num
+      - '2'
+    - values:
+      - --num
+      - '3'
+    - values:
+      - --num
+      - '4'
+    - values:
+      - --num
+      - '5'
   inputs:
   - entries:
     - data.raw
