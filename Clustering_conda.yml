@@ -40,6 +40,11 @@ stages:
     parameters:
     - values:
       - --dataset_name
+      - FR-FCM-Z2KP_healthy_final
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
       - FR-FCM-Z2KP_virus_final
       - --seed
       - '42'
