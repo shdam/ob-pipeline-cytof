@@ -43,9 +43,9 @@ metric_collectors:
   - metrics.scores
   outputs:
   - id: metrics.report
-    path: '{input}/metric_collectors/metrics_report/{params}/metrics_report.html'
+    path: '{input}/metric_collectors/metrics_report/metrics_report.html'
   - id: metrics.plots
-    path: '{input}/metric_collectors/metrics_report/{params}/metric_plots.tar.gz'
+    path: '{input}/metric_collectors/metrics_report/metric_plots.tar.gz'
 stages:
 - id: data
   modules:
