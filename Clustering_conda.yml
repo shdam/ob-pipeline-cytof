@@ -73,7 +73,7 @@ stages:
               - "42"
           - values:
               - --dataset_name
-              - FR-FCM-Z238_infection_final
+              - Transformed
               - --seed
               - "42"
     outputs:
