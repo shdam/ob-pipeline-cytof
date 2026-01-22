@@ -4,6 +4,8 @@ channels:
   - r
   - nodefaults
 dependencies:
+  - conda-forge::python>=3.11,<3.13
+  - conda-forge::pydantic-core
   - conda-forge::r-base>=4.4,<4.5.0a0
   - conda-forge::r-argparse
   - conda-forge::r-jsonlite
