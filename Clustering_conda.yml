@@ -29,90 +29,90 @@ software_environments:
     conda: envs/dgcytof.yml
     envmodule: dgcytof
 stages:
-  - id: data
-    modules:
-      - id: data_import
-        name: Prepared CyTOF CSV dataset from GitHub prepared folder
-        software_environment: py
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-data
-          commit: 702e8f8ba4fb468172e3617861ed8ec01664fd60
-        parameters:
-          - values:
-              - --dataset_name
-              - FR-FCM-Z2KP_virus_final
-              - --seed
-              - "42"
-    outputs:
-      - id: data.raw
-        path: "{input}/{stage}/{module}/{params}/{dataset}.data.gz"
-      - id: data.attachments
-        path: "{input}/{stage}/{module}/{params}/{dataset}.attachments.gz"
-      - id: data.order
-        path: "{input}/{stage}/{module}/{params}/{dataset}.order.json.gz"
-  - id: preprocessing
-    modules:
-      - id: data_preprocessing
-        name: Data preprocessing for CyTOF datasets
-        software_environment: py
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-preprocessing
-          commit: d8329a65fcf9aa1d0f265a528026d22dc84639bf
-        parameters:
-          - values:
-              - --test-sample-limit
-              - "5"
-              - --num
-              - "1"
-    inputs:
-      - entries:
-          - data.raw
-          - data.attachments
-          - data.order
-    outputs:
-      - id: data.train_matrix
-        path: "{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz"
-      - id: data.train_labels
-        path: "{input}/{stage}/{module}/{params}/{dataset}.train.labels.tar.gz"
-      - id: data.test_matrices
-        path: "{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz"
-      - id: data.test_labels
-        path: "{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz"
-      - id: data.label_key
-        path: "{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz"
-  - id: analysis
-    inputs:
-      - entries:
-          - data.train_matrix
-          - data.train_labels
-          - data.test_matrices
-    modules:
-      - id: dgcytof
-        name: DG-CyTOF
-        software_environment: dgcytof
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-dgcytof
-          commit: 7f924a02de7118e0cb53df5acc894cc2458a8a06
-        parameters: []
-    outputs:
-      - id: analysis.prediction
-        path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz"
-  - id: metrics
-    modules:
-      - id: flow_metrics
-        name: benchmark metrics for flow/cytof data
-        software_environment: py
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-metrics
-          commit: 0ce580659d7f56b426e106fb3e44bc0565f34681
-        parameters:
-          - values:
-              - --metric
-              - all
-    inputs:
-      - entries:
-          - analysis.prediction
-          - data.test_labels
-    outputs:
-      - id: metrics.scores
-        path: "{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz"
+- id: data
+  modules:
+  - id: data_import
+    name: Prepared CyTOF CSV dataset from GitHub prepared folder
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-data
+      commit: 3e49f6597ec8711dc5b19e80792db75c3c3947e8
+    parameters:
+    - values:
+      - --dataset_name
+      - FR-FCM-Z2KP_virus_final
+      - --seed
+      - '42'
+  outputs:
+  - id: data.raw
+    path: '{input}/{stage}/{module}/{params}/{dataset}.data.gz'
+  - id: data.attachments
+    path: '{input}/{stage}/{module}/{params}/{dataset}.attachments.gz'
+  - id: data.order
+    path: '{input}/{stage}/{module}/{params}/{dataset}.order.json.gz'
+- id: preprocessing
+  modules:
+  - id: data_preprocessing
+    name: Data preprocessing for CyTOF datasets
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-preprocessing
+      commit: 3fd87a021ea93f12af0d16b5483109c05e4f2154
+    parameters:
+    - values:
+      - --test-sample-limit
+      - '5'
+      - --num
+      - '1'
+  inputs:
+  - entries:
+    - data.raw
+    - data.attachments
+    - data.order
+  outputs:
+  - id: data.train_matrix
+    path: '{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz'
+  - id: data.train_labels
+    path: '{input}/{stage}/{module}/{params}/{dataset}.train.labels.tar.gz'
+  - id: data.test_matrices
+    path: '{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz'
+  - id: data.test_labels
+    path: '{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz'
+  - id: data.label_key
+    path: '{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz'
+- id: analysis
+  inputs:
+  - entries:
+    - data.train_matrix
+    - data.train_labels
+    - data.test_matrices
+  modules:
+  - id: dgcytof
+    name: DG-CyTOF
+    software_environment: dgcytof
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-dgcytof
+      commit: 7f924a02de7118e0cb53df5acc894cc2458a8a06
+    parameters: []
+  outputs:
+  - id: analysis.prediction
+    path: '{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz'
+- id: metrics
+  modules:
+  - id: flow_metrics
+    name: benchmark metrics for flow/cytof data
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-metrics
+      commit: 0ce580659d7f56b426e106fb3e44bc0565f34681
+    parameters:
+    - values:
+      - --metric
+      - all
+  inputs:
+  - entries:
+    - analysis.prediction
+    - data.test_labels
+  outputs:
+  - id: metrics.scores
+    path: '{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz'
