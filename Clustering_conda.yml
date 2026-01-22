@@ -104,7 +104,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-metrics
-      commit: 37c6e86fee7ef63ece790a0342009c546ab7a58a
+      commit: dbdf534b87729fc808bbb1a2ceb4634d528f7c74
     parameters:
     - values:
       - --metric
