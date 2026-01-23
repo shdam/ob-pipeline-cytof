@@ -41,6 +41,10 @@ software_environments:
     description: Deepcytof environment
     conda: envs/deepcytof.yml
     envmodule: deepcytof
+  bash:
+    description: Bash environment
+    conda: envs/bash.yml
+    envmodule: bash
   metrics_r:
     description: Metrics collector R environment
     conda: envs/metrics_r.yml
@@ -151,12 +155,12 @@ stages:
           url: https://github.com/JavierHdCKU/ob-pipeline-deepcytof
           commit: 37a9b53eebe3f6b7bcc0cc643472b1d9e5069396
         parameters: []
-      # - id: cygate
-      #   name: CyGATE
-      #   software_environment: bash
-      #   repository:
-      #     url: https://github.com/helenewegener1/ob-pipeline-CyGATE
-      #     commit: 922c93876b9cc1384fe9092d0f29b53a4b032dc0
+      - id: cygate
+        name: CyGATE
+        software_environment: bash
+        repository:
+          url: https://github.com/helenewegener1/ob-pipeline-CyGATE
+          commit: 922c93876b9cc1384fe9092d0f29b53a4b032dc0
       #   parameters: []
       - id: random
         name: Random
