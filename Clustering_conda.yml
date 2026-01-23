@@ -137,6 +137,34 @@ stages:
           url: https://github.com/kaae-2/ob-pipeline-dgcytof
           commit: 5e5cc8c0bbb01834311e3af402bc32a6aac9160d
         parameters: []
+      - id: gatemeclass_V
+        name: GateMeClass (GMM Variable)
+        software_environment: cran
+        repository:
+          url: https://github.com/andreasonnen/gatemeclass
+          commit: e3f63cd26b68ef97efdc2777282fdcb4691fc66e
+        parameters:
+          - values:
+              - --GMM_parameterization
+              - V
+              - --sampling
+              - "1.0"
+              - --k
+              - "20"
+      - id: gatemeclass_E
+        name: GateMeClass (GMM Equal)
+        software_environment: cran
+        repository:
+          url: https://github.com/andreasonnen/gatemeclass
+          commit: e3f63cd26b68ef97efdc2777282fdcb4691fc66e
+        parameters:
+          - values:
+              - --GMM_parameterization
+              - E
+              - --sampling
+              - "1.0"
+              - --k
+              - "20"
     outputs:
       - id: analysis.prediction
         path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz"
