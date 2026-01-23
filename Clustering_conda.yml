@@ -137,6 +137,34 @@ stages:
           url: https://github.com/kaae-2/ob-pipeline-dgcytof
           commit: 5e5cc8c0bbb01834311e3af402bc32a6aac9160d
         parameters: []
+      - id: cygate
+        name: CyGATE
+        software_environment: bash
+        repository:
+          url: https://github.com/helenewegener1/ob-pipeline-CyGATE
+          commit: 922c93876b9cc1384fe9092d0f29b53a4b032dc0
+        parameters: []
+      - id: random
+        name: Random
+        software_environment: cran
+        repository:
+          url: https://github.com/helenewegener1/ob-pipeline-random
+          commit: 81411c1999cc0bce78a7315d96b1aa9ea9e8f852
+        parameters: []
+      - id: lda
+        name: LDA
+        software_environment: cran-hw
+        repository:
+          url: https://github.com/helenewegener1/ob-pipeline-LDA
+          commit: 49a7c5269be061de521047016e58f4988a8e9648
+        parameters: []
+      - id: deepcytof
+        name: DeepCyTOF
+        software_environment: deepcytof
+        repository:
+          url: https://github.com/JavierHdCKU/ob-pipeline-deepcytof
+          commit: 37a9b53eebe3f6b7bcc0cc643472b1d9e5069396
+        parameters: []
     outputs:
       - id: analysis.prediction
         path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz"
