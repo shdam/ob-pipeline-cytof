@@ -26,7 +26,7 @@ software_environments:
     conda: envs/cyanno_env.yml
     envmodule: cyanno
   gatemeclass:
-    description : gatemeclass module environment
+    description: gatemeclass module environment
     conda: envs/gateme_env.yml
     envmodule: gatemeclass
   dgcytof:
@@ -155,4 +155,3 @@ stages:
     outputs:
       - id: metrics.scores
         path: "{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz"
-

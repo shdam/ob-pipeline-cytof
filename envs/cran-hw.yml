@@ -1,0 +1,26 @@
+name: cran
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.12
+  - r-base=4.3
+  - r-ggplot2
+  - r-dplyr
+  - r-tidyr
+  - r-glue
+  - r-purrr
+  - r-jsonlite
+  - r-data.table
+  - r-rmarkdown
+  - r-cairo
+  - r-svglite
+  - r-argparse
+  - r-MASS
+  - r-devtools
+  - r-readr
+  - r-purrr
+  - r-dplyr
+  - r-glue
+  - r-data.table
+  # - r-archive
