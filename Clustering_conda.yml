@@ -25,6 +25,10 @@ software_environments:
     description: CyAnno module environment
     conda: envs/cyanno_env.yml
     envmodule: cyanno
+  gatemeclass:
+    description : gatemeclass module environment
+    conda: envs/gateme_env.yml
+    envmodule: gatemeclass
   dgcytof:
     description: DG-CyTOF legacy environment
     conda: envs/dgcytof.yml
@@ -113,7 +117,7 @@ stages:
 
       - id: gatemeclass
         name: GateMeClass
-        software_environment: cran
+        software_environment: gatemeclass
         repository:
           url: https://github.com/andreasonnen/gatemeclass
           commit: e3f63cd26b68ef97efdc2777282fdcb4691fc66e
