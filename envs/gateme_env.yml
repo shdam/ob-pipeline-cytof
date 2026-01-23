@@ -1,0 +1,27 @@
+name: gatemeclass
+channels:
+  - conda-forge
+  - bioconda
+  - r
+  - nodefaults
+dependencies:
+  # Core R
+  - conda-forge::r-base=4.3.2
+  
+  # Wrapper dependencies
+  - conda-forge::r-argparse=2.2.5
+  - conda-forge::r-data.table=1.15.4
+  - conda-forge::r-jsonlite=2.0.0
+  - conda-forge::r-remotes=2.5.0
+  
+  - conda-forge::r-mclust=6.1.1
+  - conda-forge::r-caret=6.0_94
+  - bioconda::bioconductor-batchelor=1.18.0
+    - conda-forge::r-class
+  - conda-forge::r-e1071
+  - conda-forge::r-lattice
+  - conda-forge::r-foreach
+  
+  - bioconda::bioconductor-biocgenerics
+  - bioconda::bioconductor-singlecellexperiment
+  - bioconda::bioconductor-s4vectors
