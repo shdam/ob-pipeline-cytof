@@ -1,0 +1,20 @@
+name: bash
+channels:
+  - conda-forge
+dependencies:
+  - bash
+  - coreutils
+  - grep
+  - sed
+  - gawk
+  - findutils
+  - parallel
+  - jq
+  - curl
+  - wget
+  - zip
+  - unzip
+  - xz
+  - gzip
+  - bzip2
+  - tar
