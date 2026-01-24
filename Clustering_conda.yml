@@ -57,6 +57,7 @@ metric_collectors:
       commit: b59741c242413925834ebc086531890b1f5e0963
     inputs:
       - metrics.scores
+      - data.order
     outputs:
       - id: metrics.report
         path: "{input}/metric_collectors/metrics_report/metrics_report.html"
@@ -102,11 +103,11 @@ stages:
               - Transformed
               - --seed
               - "42"
-          - values:
-              - --dataset_name
-              - Levine
-              - --seed
-              - "42"
+          # - values:
+          #     - --dataset_name
+          #     - Levine
+          #     - --seed
+          #     - "42"
     outputs:
       - id: data.raw
         path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
