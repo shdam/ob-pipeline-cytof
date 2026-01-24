@@ -14,9 +14,13 @@ dependencies:
   # Wrapper dependencies
   - conda-forge::r-argparse=2.2.5
   - conda-forge::r-data.table=1.15.4
+  - conda-forge::r-stringi
+  - conda-forge::r-stringr
+  - conda-forge::r-scales
+  - conda-forge::r-recipes
+  - conda-forge::r-moments
   - conda-forge::r-jsonlite=2.0.0
   - conda-forge::r-remotes=2.5.0
-  
   - conda-forge::r-mclust=6.1.1
   - conda-forge::r-caret=6.0_94
   - conda-forge::r-s7
