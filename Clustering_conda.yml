@@ -54,7 +54,7 @@ metric_collectors:
     software_environment: metrics_r
     repository:
       url: https://github.com/kaae-2/ob-metrics-collectors.git
-      commit: b59741c242413925834ebc086531890b1f5e0963
+      commit: 52620e72be9d8364d20cb7a0a34386ed2d7865a4
     inputs:
       - metrics.scores
       - data.order
@@ -103,11 +103,6 @@ stages:
               - Transformed
               - --seed
               - "42"
-          # - values:
-          #     - --dataset_name
-          #     - Levine
-          #     - --seed
-          #     - "42"
     outputs:
       - id: data.raw
         path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
@@ -122,23 +117,33 @@ stages:
         software_environment: py
         repository:
           url: https://github.com/kaae-2/ob-pipeline-preprocessing
-          commit: 65bcc39cc455769edccdd2583c626295b9724fd3
+          commit: 71036d122c5197df61cf56d4a755262f6b24fbab
         parameters:
           - values:
               - --num
               - "1"
+              - --max-workers
+              - "4"
           - values:
               - --num
               - "2"
+              - --max-workers
+              - "4"
           - values:
               - --num
               - "3"
+              - --max-workers
+              - "4"
           - values:
               - --num
+              - "4"
+              - --max-workers
               - "4"
           - values:
               - --num
               - "5"
+              - --max-workers
+              - "4"
     inputs:
       - entries:
           - data.raw
@@ -168,6 +173,13 @@ stages:
         repository:
           url: https://github.com/kaae-2/ob-pipeline-dgcytof
           commit: fb3dae5395e719dd21a7a10777067fe677b4af29
+        parameters: []
+      - id: random
+        name: Random
+        software_environment: cran
+        repository:
+          url: https://github.com/helenewegener1/ob-pipeline-random
+          commit: 81411c1999cc0bce78a7315d96b1aa9ea9e8f852
         parameters: []
     outputs:
       - id: analysis.prediction
