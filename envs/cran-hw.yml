@@ -1,4 +1,4 @@
-name: cran
+name: cran-hw
 channels:
   - conda-forge
   - bioconda

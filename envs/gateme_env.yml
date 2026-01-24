@@ -5,6 +5,9 @@ channels:
   - r
   - nodefaults
 dependencies:
+  - conda-forge::python=3.12.6
+  - conda-forge::pydantic=2.8.2
+  - conda-forge::pydantic-core=2.20.1
   # Core R
   - conda-forge::r-base=4.3.2
   
@@ -16,8 +19,13 @@ dependencies:
   
   - conda-forge::r-mclust=6.1.1
   - conda-forge::r-caret=6.0_94
+  - conda-forge::r-s7
+  - conda-forge::r-gmp=0.7_5
+  - conda-forge::r-rcppalgos=2.9.3
+  - conda-forge::r-moments=0.14.1
+  - conda-forge::r-biocmanager
   - bioconda::bioconductor-batchelor=1.18.0
-    - conda-forge::r-class
+  - conda-forge::r-class
   - conda-forge::r-e1071
   - conda-forge::r-lattice
   - conda-forge::r-foreach
