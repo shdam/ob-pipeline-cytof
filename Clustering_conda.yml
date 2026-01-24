@@ -161,7 +161,7 @@ stages:
     software_environment: dgcytof
     repository:
       url: https://github.com/kaae-2/ob-pipeline-dgcytof
-      commit: 5e5cc8c0bbb01834311e3af402bc32a6aac9160d
+      commit: fb3dae5395e719dd21a7a10777067fe677b4af29
     parameters: []
   outputs:
   - id: analysis.prediction
