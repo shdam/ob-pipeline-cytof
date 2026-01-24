@@ -174,19 +174,54 @@ stages:
           url: https://github.com/kaae-2/ob-pipeline-dgcytof
           commit: fb3dae5395e719dd21a7a10777067fe677b4af29
         parameters: []
-      - id: random
-        name: Random
-        software_environment: cran
+      - id: gatemeclass
+        name: GateMeClass
+        software_environment: gatemeclass
         repository:
-          url: https://github.com/helenewegener1/ob-pipeline-random
-          commit: 81411c1999cc0bce78a7315d96b1aa9ea9e8f852
+          url: https://github.com/kaae-2/gatemeclass
+          commit: e3f63cd26b68ef97efdc2777282fdcb4691fc66e
+        parameters:
+          - values:
+              - --GMM_parameterization
+              - V
+              - --sampling
+              - "1.0"
+              - --k
+              - "20"
+          - values:
+              - --GMM_parameterization
+              - E
+              - --sampling
+              - "1.0"
+              - --k
+              - "20"
+          - values:
+              - --GMM_parameterization
+              - V
+              - --sampling
+              - "1.0"
+              - --k
+              - "20"
+      - id: deepcytof
+        name: DeepCyTOF
+        software_environment: deepcytof
+        repository:
+          url: https://github.com/kaae-2/ob-pipeline-deepcytof
+          commit: 37a9b53eebe3f6b7bcc0cc643472b1d9e5069396
         parameters: []
       - id: cygate
         name: CyGATE
         software_environment: bash
         repository:
-          url: https://github.com/helenewegener1/ob-pipeline-CyGATE
+          url: https://github.com/kaae-2/ob-pipeline-CyGATE
           commit: 922c93876b9cc1384fe9092d0f29b53a4b032dc0
+      - id: random
+        name: Random
+        software_environment: cran
+        repository:
+          url: https://github.com/kaae-2/ob-pipeline-random
+          commit: 81411c1999cc0bce78a7315d96b1aa9ea9e8f852
+        parameters: []
     outputs:
       - id: analysis.prediction
         path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz"
