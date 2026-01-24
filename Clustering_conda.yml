@@ -117,7 +117,7 @@ stages:
         software_environment: py
         repository:
           url: https://github.com/kaae-2/ob-pipeline-preprocessing
-          commit: 71036d122c5197df61cf56d4a755262f6b24fbab
+          commit: 8e46aea827e7525d9fad070f021216873031b696
         parameters:
           - values:
               - --num
@@ -181,6 +181,12 @@ stages:
           url: https://github.com/helenewegener1/ob-pipeline-random
           commit: 81411c1999cc0bce78a7315d96b1aa9ea9e8f852
         parameters: []
+      - id: cygate
+        name: CyGATE
+        software_environment: bash
+        repository:
+          url: https://github.com/helenewegener1/ob-pipeline-CyGATE
+          commit: 922c93876b9cc1384fe9092d0f29b53a4b032dc0
     outputs:
       - id: analysis.prediction
         path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz"
