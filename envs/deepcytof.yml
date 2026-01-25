@@ -13,6 +13,8 @@ dependencies:
   - conda-forge::matplotlib=3.7.2
   - conda-forge::h5py=3.8.0
   - conda-forge::pyyaml=6.0.3
+  - conda-forge::pydantic=2.8.2
+  - conda-forge::pydantic-core=2.20.1
   - conda-forge::typing_extensions=4.12.2
   - pip:
       - tensorflow==2.19.0
