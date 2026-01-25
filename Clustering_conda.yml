@@ -200,7 +200,7 @@ stages:
     software_environment: deepcytof
     repository:
       url: https://github.com/kaae-2/ob-pipeline-deepcytof
-      commit: 5d6c565cb5b51f874c82cfc6a7b682968fedaf58
+      commit: cc35a7d27a0d97883453df5f72801b8c7383c793
     parameters: []
   - id: cygate
     name: CyGATE
