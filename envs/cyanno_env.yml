@@ -9,7 +9,7 @@ dependencies:
   - pip
 
   # ---- OmniBenchmark dependencies required for schema loading ----
-  - pyyaml=5.4.1  # provides yaml._yaml C-extension
+  - pyyaml        # provides yaml._yaml C-extension
   - isodate       # rdflib -> linkml -> omni_schema
   - rdflib
   - pyparsing

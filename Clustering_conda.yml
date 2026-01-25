@@ -207,7 +207,7 @@ stages:
     software_environment: deepcytof
     repository:
       url: https://github.com/kaae-2/ob-pipeline-deepcytof
-      commit: 9acc1fc5cb538c68cbd79b37f9cff0c6c18dd46d
+      commit: c050f21fbe1273d2c8d593695380de7a25a5143c
     parameters: []
   - id: cygate
     name: CyGATE
@@ -220,7 +220,7 @@ stages:
     software_environment: cran
     repository:
       url: https://github.com/kaae-2/ob-pipeline-random
-      commit: 7833a39c9ac2519d5985458eafad2e05a8af0e52
+      commit: 92b9e2dbc84f982caff12bd735956cec81da56bc
     parameters: []
   outputs:
   - id: analysis.prediction
