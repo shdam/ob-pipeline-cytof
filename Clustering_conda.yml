@@ -179,7 +179,7 @@ stages:
     software_environment: gatemeclass
     repository:
       url: https://github.com/kaae-2/GateMeClass_model
-      commit: 9dc4d4ec3d2afc166d93d1ff95658aab834ddadd
+      commit: cfe27180eb596586b279b89e3540179913d13a51
     parameters:
     - values:
       - --GMM_parameterization
