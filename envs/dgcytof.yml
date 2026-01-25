@@ -18,7 +18,7 @@ dependencies:
   - conda-forge::tensorboard=2.13.0
   - conda-forge::isodate
   - conda-forge::pydantic
-  - conda-forge::pyyaml
+  - conda-forge::pyyaml=5.4.1
   - conda-forge::pip
   - pip:
       - "torch==2.0.1"

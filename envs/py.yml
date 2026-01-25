@@ -35,7 +35,7 @@ dependencies:
       - "prefixmaps"
       - "prefixcommons"
       - "rdflib"
-      - "pyyaml"
+      - "pyyaml==5.4.1"
       - "pyparsing"
       - "isodate"
       - "webencodings"
