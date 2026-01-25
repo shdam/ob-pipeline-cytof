@@ -16,6 +16,5 @@ dependencies:
   - conda-forge::pydantic=2.8.2
   - conda-forge::pydantic-core=2.20.1
   - conda-forge::typing_extensions=4.12.2
-  - pip:
-      - tensorflow==2.14.0
-      - fcsparser==0.2.8
+  - conda-forge::tensorflow=2.14.*
+  - conda-forge::fcsparser=0.2.8
