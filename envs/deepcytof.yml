@@ -17,6 +17,6 @@ dependencies:
   - conda-forge::pydantic-core=2.20.1
   - conda-forge::typing_extensions=4.12.2
   - pip:
-      - tensorflow-rocm==2.16.1
+      - tensorflow-rocm==2.14.0.600
       - typing_extensions>=4.6
       - fcsparser==0.2.8
