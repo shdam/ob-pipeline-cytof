@@ -1,0 +1,229 @@
+id: cytof_benchmmark_exercise
+description: Benchmark of different clustering algorithms for benchmark phd course.
+version: 0.1
+benchmarker: Andrea Sonnenholzner, Frederik Kirk, Helene Wegener, Javier Herranz
+storage: http://omnibenchmark.org:9000
+benchmark_yaml_spec: 0.04
+storage_api: S3
+storage_bucket_name: clusteringexampleconda
+software_backend: conda
+software_environments:
+  py:
+    description: clustbench on py3.12.6
+    conda: envs/py.yml
+    envmodule: py
+  py-old:
+    description: clustbench on py3.12.6
+    conda: envs/py-old.yml
+    envmodule: py-old
+  cran:
+    description: CRAN R environment
+    conda: envs/cran.yml
+    envmodule: cran
+  cran-hw:
+    description: CRAN-hw R environment
+    conda: envs/cran-hw.yml
+    envmodule: cran-hw
+  cyanno:
+    description: CyAnno module environment
+    conda: envs/cyanno_env.yml
+    envmodule: cyanno
+  gatemeclass:
+    description: gatemeclass module environment
+    conda: envs/gateme_env.yml
+    envmodule: gatemeclass
+  dgcytof:
+    description: DG-CyTOF legacy environment
+    conda: envs/dgcytof.yml
+    envmodule: dgcytof
+  deepcytof:
+    description: Deepcytof environment
+    conda: envs/deepcytof.yml
+    envmodule: deepcytof
+  bash:
+    description: Bash environment
+    conda: envs/bash.yml
+    envmodule: bash
+  metrics_r:
+    description: Metrics collector R environment
+    conda: envs/metrics_r.yml
+    envmodule: metrics_r
+metric_collectors:
+  - id: metrics_report
+    name: Metrics report collector
+    software_environment: metrics_r
+    repository:
+      url: https://github.com/kaae-2/ob-metrics-collectors.git
+      commit: b59741c242413925834ebc086531890b1f5e0963
+    inputs:
+      - metrics.scores
+    outputs:
+      - id: metrics.report
+        path: "{input}/metric_collectors/metrics_report/metrics_report.html"
+      - id: metrics.plots
+        path: "{input}/metric_collectors/metrics_report/metric_plots.tar.gz"
+stages:
+  - id: data
+    modules:
+      - id: data_import
+        name: Prepared CyTOF CSV dataset from GitHub prepared folder
+        software_environment: py
+        repository:
+          url: https://github.com/kaae-2/ob-pipeline-data
+          commit: ab92b32159f95829219bd93a6880924276104a47
+        parameters:
+          - values:
+              - --dataset_name
+              - FR-FCM-Z2KP_healthy_final
+              - --seed
+              - "42"
+          - values:
+              - --dataset_name
+              - FR-FCM-Z2KP_virus_final
+              - --seed
+              - "42"
+          - values:
+              - --dataset_name
+              - FR-FCM-Z238_infection_final
+              - --seed
+              - "42"
+          - values:
+              - --dataset_name
+              - FR-FCM-Z3YR
+              - --seed
+              - "42"
+          - values:
+              - --dataset_name
+              - Samusik
+              - --seed
+              - "42"
+          - values:
+              - --dataset_name
+              - Transformed
+              - --seed
+              - "42"
+    outputs:
+      - id: data.raw
+        path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
+      - id: data.attachments
+        path: "{input}/{stage}/{module}/{params}/{dataset}.attachments.gz"
+      - id: data.order
+        path: "{input}/{stage}/{module}/{params}/{dataset}.order.json.gz"
+  - id: preprocessing
+    modules:
+      - id: data_preprocessing
+        name: Data preprocessing for CyTOF datasets
+        software_environment: py
+        repository:
+          url: https://github.com/kaae-2/ob-pipeline-preprocessing
+          commit: 65bcc39cc455769edccdd2583c626295b9724fd3
+        parameters:
+          - values:
+              - --num
+              - "1"
+          - values:
+              - --num
+              - "2"
+          - values:
+              - --num
+              - "3"
+          - values:
+              - --num
+              - "4"
+          - values:
+              - --num
+              - "5"
+    inputs:
+      - entries:
+          - data.raw
+          - data.attachments
+          - data.order
+    outputs:
+      - id: data.train_matrix
+        path: "{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz"
+      - id: data.train_labels
+        path: "{input}/{stage}/{module}/{params}/{dataset}.train.labels.tar.gz"
+      - id: data.test_matrix
+        path: "{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz"
+      - id: data.true_labels
+        path: "{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz"
+      - id: data.label_key
+        path: "{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz"
+  - id: analysis
+    inputs:
+      - entries:
+          - data.train_matrix
+          - data.train_labels
+          - data.test_matrix
+    modules:
+      - id: dgcytof
+        name: DG-CyTOF
+        software_environment: dgcytof
+        repository:
+          url: https://github.com/kaae-2/ob-pipeline-dgcytof
+          commit: 5e5cc8c0bbb01834311e3af402bc32a6aac9160d
+        parameters: []
+      - id: gatemeclass
+        name: GateMeClass
+        software_environment: gatemeclass
+        repository:
+          url: https://github.com/andreasonnen/gatemeclass
+          commit: e3f63cd26b68ef97efdc2777282fdcb4691fc66e
+        parameters:
+          - values:
+              - --GMM_parameterization
+              - V
+              - --sampling
+              - "1.0"
+              - --k
+              - "20"
+          - values:
+              - --GMM_parameterization
+              - E
+              - --sampling
+              - "1.0"
+              - --k
+              - "20"
+      - id: deepcytof
+        name: DeepCyTOF
+        software_environment: deepcytof
+        repository:
+          url: https://github.com/JavierHdCKU/ob-pipeline-deepcytof
+          commit: 37a9b53eebe3f6b7bcc0cc643472b1d9e5069396
+        parameters: []
+      - id: cygate
+        name: CyGATE
+        software_environment: bash
+        repository:
+          url: https://github.com/helenewegener1/ob-pipeline-CyGATE
+          commit: 922c93876b9cc1384fe9092d0f29b53a4b032dc0
+      - id: random
+        name: Random
+        software_environment: cran
+        repository:
+          url: https://github.com/helenewegener1/ob-pipeline-random
+          commit: 81411c1999cc0bce78a7315d96b1aa9ea9e8f852
+        parameters: []
+    outputs:
+      - id: analysis.prediction
+        path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz"
+  - id: metrics
+    modules:
+      - id: flow_metrics
+        name: benchmark metrics for flow/cytof data
+        software_environment: py
+        repository:
+          url: https://github.com/kaae-2/ob-pipeline-metrics
+          commit: 4dc6e4e188c7e99ea9beef1e0074a0d77e706610
+        parameters:
+          - values:
+              - --metric
+              - all
+    inputs:
+      - entries:
+          - analysis.prediction
+          - data.true_labels
+          - data.label_key
+    outputs:
+      - id: metrics.scores
+        path: "{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz"

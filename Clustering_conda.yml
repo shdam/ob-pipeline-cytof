@@ -54,7 +54,7 @@ metric_collectors:
   software_environment: metrics_r
   repository:
     url: https://github.com/kaae-2/ob-metrics-collectors.git
-    commit: 5b4e4573ede091dd07e53d56fb4e77bf5d6e4645
+    commit: 5cde689fbf602f4b82f7e8bfaa39e9ba4cb3d441
   inputs:
   - metrics.scores
   - data.order
