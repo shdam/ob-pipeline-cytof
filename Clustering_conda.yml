@@ -1,6 +1,6 @@
 id: cytof_benchmmark_exercise
 description: Benchmark of different clustering algorithms for benchmark phd course.
-version: 0.1
+version: 0.2
 benchmarker: Andrea Sonnenholzner, Frederik Kirk, Helene Wegener, Javier Herranz
 storage: http://omnibenchmark.org:9000
 benchmark_yaml_spec: 0.04
@@ -103,6 +103,27 @@ stages:
               - Transformed
               - --seed
               - "42"
+          - values:
+              - --dataset_name
+              - Levine
+              - --seed
+              - "420"
+              - --sub-sampling
+              - "10000"
+          - values:
+              - --dataset_name
+              - Levine
+              - --seed
+              - "420"
+              - --sub-sampling
+              - "50000"
+          - values:
+              - --dataset_name
+              - Levine
+              - --seed
+              - "420"
+              - --sub-sampling
+              - "100000"
     outputs:
       - id: data.raw
         path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
