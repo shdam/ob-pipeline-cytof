@@ -219,7 +219,7 @@ stages:
         name: LDA
         software_environment: cran
         repository:
-          url: https://github.com/helenewegener1/ob-pipeline-LDA
+          url: https://github.com/kaae-2/ob-pipeline-LDA
           commit: 49a7c5269be061de521047016e58f4988a8e9648
         parameters: []
     outputs:
