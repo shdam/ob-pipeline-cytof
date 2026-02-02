@@ -220,7 +220,7 @@ stages:
     software_environment: cran
     repository:
       url: https://github.com/kaae-2/ob-pipeline-LDA
-      commit: 6be6eb7a23c7a0701172bdb4db3686d4b350c14b
+      commit: fafbc89cd05a2d5e04bc4beb4e16f59bc66bfec6
     parameters: []
   outputs:
   - id: analysis.prediction
