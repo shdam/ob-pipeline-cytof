@@ -71,7 +71,7 @@ stages:
         software_environment: py
         repository:
           url: https://github.com/kaae-2/ob-pipeline-data
-          commit: f3bbfb70d05fac7d95ae0c566bfab8eefa2f996a
+          commit: 9ac125466594edb2a411ac45dc1d8b4181b053ad
         parameters:
           - values:
               - --dataset_name
@@ -117,35 +117,35 @@ stages:
               - --dataset_name
               - FR-FCM-Z2KP_healthy_final
               - --seed
-              - "42"
+              - "420"
               - --sub-sampling
               - "1000"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP_healthy_final
               - --seed
-              - "42"
+              - "420"
               - --sub-sampling
               - "5000"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP_healthy_final
               - --seed
-              - "42"
+              - "420"
               - --sub-sampling
               - "10000"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP_healthy_final
               - --seed
-              - "42"
+              - "420"
               - --sub-sampling
               - "50000"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP_healthy_final
               - --seed
-              - "42"
+              - "420"
               - --sub-sampling
               - "100000"
     outputs:
@@ -224,7 +224,7 @@ stages:
         software_environment: bash
         repository:
           url: https://github.com/kaae-2/ob-pipeline-CyGATE
-          commit: ecdf011efffbd229470b22a080b24eca4010aba2
+          commit: 9414ebd2704f0e58b1b14b970142fae9fa06c03d
       - id: random
         name: Random
         software_environment: cran
@@ -256,7 +256,7 @@ stages:
         software_environment: py
         repository:
           url: https://github.com/kaae-2/ob-pipeline-metrics
-          commit: b6282d917e176a9df22af59f2656469317d307e2
+          commit: 0e3833813eab15970d674f5aae4282a28ee70abb
         parameters:
           - values:
               - --metric
