@@ -224,7 +224,7 @@ stages:
     software_environment: bash
     repository:
       url: https://github.com/kaae-2/ob-pipeline-CyGATE
-      commit: a849c3a8f10ebf8cd53ac11f562f13087e9a0182
+      commit: 55b1ed3817ceaf50b8c4abec370faeb87b15688c
   - id: random
     name: Random
     software_environment: cran
