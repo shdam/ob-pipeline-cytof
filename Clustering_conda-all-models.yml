@@ -1,6 +1,6 @@
 id: cytof_benchmmark_exercise
 description: Benchmark of different clustering algorithms for benchmark phd course.
-version: 0.1
+version: 0.2
 benchmarker: Andrea Sonnenholzner, Frederik Kirk, Helene Wegener, Javier Herranz
 storage: http://omnibenchmark.org:9000
 benchmark_yaml_spec: 0.04
