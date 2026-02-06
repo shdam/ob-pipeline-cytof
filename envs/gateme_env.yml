@@ -8,7 +8,7 @@ dependencies:
   - conda-forge::python=3.12.6
   - conda-forge::pydantic=2.8.2
   - conda-forge::pydantic-core=2.20.1
-  # - conda-forge::pyyaml
+  - conda-forge::pyyaml
   # Core R
   - conda-forge::r-base=4.3.2
 
