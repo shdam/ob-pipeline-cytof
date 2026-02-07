@@ -249,14 +249,14 @@ stages:
     software_environment: cran
     repository:
       url: https://github.com/kaae-2/ob-pipeline-LDA
-      commit: be833d535fb1152570ace22516bd6be248900ac3
+      commit: a696fb580e5b494c2dd5c2f5c70f02b465ecbdda
     parameters: []
   - id: gatemeclass
     name: GateMeClass
     software_environment: gatemeclass
     repository:
       url: https://github.com/kaae-2/GateMeClass_model
-      commit: c6d80e349c2c84e115c203b647f420376a5372e6
+      commit: 36b62960fd20697be45b46a14cfbfeeaf5f04c2e
     parameters:
     - values:
       - --GMM_parameterization
