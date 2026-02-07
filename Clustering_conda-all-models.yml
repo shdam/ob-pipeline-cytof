@@ -174,14 +174,14 @@ stages:
               - --GMM_parameterization
               - V
               - --sampling
-              - "1.0"
+              - "0.1"
               - --k
               - "20"
           - values:
               - --GMM_parameterization
               - E
               - --sampling
-              - "1.0"
+              - "0.1"
               - --k
               - "20"
       - id: deepcytof
