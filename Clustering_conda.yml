@@ -71,7 +71,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-data
-      commit: f3a802fd37026e0e602f1467fc69ef0487cb0ddd
+      commit: e539f031efe3b51375043dff8f19dc9536e17de3
     parameters:
     - values:
       - --dataset_name
@@ -249,7 +249,7 @@ stages:
     software_environment: cran
     repository:
       url: https://github.com/kaae-2/ob-pipeline-LDA
-      commit: 674972dddfa143bd1a154b305df2979c59763c50
+      commit: b5fdd1988d80d4cba8b0dfd72ff47b6328f89624
     parameters: []
   - id: gatemeclass
     name: GateMeClass
