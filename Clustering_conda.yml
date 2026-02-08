@@ -235,7 +235,7 @@ stages:
     software_environment: cran
     repository:
       url: https://github.com/kaae-2/ob-pipeline-random
-      commit: 92b9e2dbc84f982caff12bd735956cec81da56bc
+      commit: a821aa92934609cb78d8f903e1487679a1b3e611
     parameters: []
   - id: cyanno
     name: CyAnno
