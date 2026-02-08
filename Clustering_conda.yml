@@ -167,7 +167,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-preprocessing
-      commit: 9451c9ae116601f4588521ce33494751a3d051f5
+      commit: 0294d900e53d9bfe218ac233bb857f09394b20a8
     parameters:
     - values:
       - --num
