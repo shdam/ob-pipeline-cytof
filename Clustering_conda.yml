@@ -173,27 +173,27 @@ stages:
       - --num
       - '1'
       - --max-workers
-      - '4'
+      - '8'
     - values:
       - --num
       - '2'
       - --max-workers
-      - '4'
+      - '8'
     - values:
       - --num
       - '3'
       - --max-workers
-      - '4'
+      - '8'
     - values:
       - --num
       - '4'
       - --max-workers
-      - '4'
+      - '8'
     - values:
       - --num
       - '5'
       - --max-workers
-      - '4'
+      - '8'
   inputs:
   - entries:
     - data.raw
