@@ -229,7 +229,7 @@ stages:
     software_environment: bash
     repository:
       url: https://github.com/kaae-2/ob-pipeline-CyGATE
-      commit: d8b43152d23297230a10a71baa42b2f0eb2fe80f
+      commit: 868c6a876b24f4e95358445c3eaa45d0bf20a998
   - id: random
     name: Random
     software_environment: cran
@@ -249,14 +249,14 @@ stages:
     software_environment: cran
     repository:
       url: https://github.com/kaae-2/ob-pipeline-LDA
-      commit: 15833c3861a232566abcda8b3fa37e6ed30d83a2
+      commit: 674972dddfa143bd1a154b305df2979c59763c50
     parameters: []
   - id: gatemeclass
     name: GateMeClass
     software_environment: gatemeclass
     repository:
       url: https://github.com/kaae-2/GateMeClass_model
-      commit: b7c6d0d01641e5e31540bb72ad0efb49a79e9061
+      commit: 3be3a8a106c12b6d112ba72be417104ba3a27620
     parameters:
     - values:
       - --GMM_parameterization
