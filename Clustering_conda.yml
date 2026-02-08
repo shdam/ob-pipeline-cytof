@@ -256,7 +256,7 @@ stages:
     software_environment: gatemeclass
     repository:
       url: https://github.com/kaae-2/GateMeClass_model
-      commit: fe7e7f2242e114a2fc17a5fac819a14c1a85959d
+      commit: 6c94c3169f3fb72bdae9d72079967b42a20c8e34
     parameters:
     - values:
       - --GMM_parameterization
@@ -275,7 +275,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-metrics
-      commit: 0e3833813eab15970d674f5aae4282a28ee70abb
+      commit: 4c0d2ea3342c59c6776cc4b69884388ae72966e4
     parameters:
     - values:
       - --metric
