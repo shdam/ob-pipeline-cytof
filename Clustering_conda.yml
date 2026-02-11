@@ -265,6 +265,8 @@ stages:
       - '0.01'
       - --k
       - '20'
+      - --excluded-datasets
+      - ''
   outputs:
   - id: analysis.prediction
     path: '{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz'

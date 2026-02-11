@@ -177,6 +177,8 @@ stages:
               - "0.1"
               - --k
               - "20"
+              - --excluded-datasets
+              - ""
           - values:
               - --GMM_parameterization
               - E
@@ -184,6 +186,8 @@ stages:
               - "0.1"
               - --k
               - "20"
+              - --excluded-datasets
+              - ""
       - id: deepcytof
         name: DeepCyTOF
         software_environment: deepcytof
