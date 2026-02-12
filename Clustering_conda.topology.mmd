@@ -1,0 +1,73 @@
+---
+title: cytof_benchmmark_exercise
+---
+flowchart LR
+	classDef param fill:#f96
+	subgraph data
+		data_import
+	end
+	subgraph preprocessing
+		data_preprocessing
+		data_import --> data_preprocessing
+	end
+	subgraph analysis
+		dgcytof
+		data_preprocessing --> dgcytof
+		cygate
+		data_preprocessing --> cygate
+		random
+		data_preprocessing --> random
+		cyanno
+		data_preprocessing --> cyanno
+		knn
+		data_preprocessing --> knn
+		lda
+		data_preprocessing --> lda
+		gatemeclass
+		data_preprocessing --> gatemeclass
+	end
+	subgraph metrics
+		flow_metrics
+		cyanno --> flow_metrics
+		cygate --> flow_metrics
+		dgcytof --> flow_metrics
+		gatemeclass --> flow_metrics
+		knn --> flow_metrics
+		lda --> flow_metrics
+		random --> flow_metrics
+	end
+	subgraph params_data_import
+		2d9eec5c7a28b4dbcf4054361851078a85e91243460ef4c8b4f37a34aae7b6eb['--dataset_name', 'FR-FCM-Z2KP_healthy_final', '--seed', '42']
+		0a2e7b8e58f3cc4a3859f604f164c7ff4a1398ac6dff16c26d45d97b876997c7['--dataset_name', 'FR-FCM-Z2KP_virus_final', '--seed', '42']
+		683720668c156a7c66e376c913320f2ac380fdcf671fb199d6c07869119e60c5['--dataset_name', 'FR-FCM-Z238_infection_final', '--seed', '42']
+		2f8f20b69440bbdf6bb69cbdef7b1a64279e9d635cf7474df0cc0a367147b5cf['--dataset_name', 'FR-FCM-Z3YR', '--seed', '42']
+		381203b74f5117f54136973faf1fcf3bafc06438b02e4c7a83adde94d869ebb5['--dataset_name', 'Samusik', '--seed', '42']
+		80a0fe6f7b6e7c2ea0b4915a38d40c85f0d6dba20b5c14c2a8e49ec2417768f3['--dataset_name', 'Transformed', '--seed', '42']
+		17302b8c72674061dddb3be07db047e8d432d2a628cb588e3a0c2f2a95ccbfc6['--dataset_name', 'Levine', '--seed', '42']
+		89856bd17b5a66fb9a1dc4285102f90a2abe6c9af1826d6fd6df3057e87ce10f['--dataset_name', 'flowcyt', '--seed', '42']
+		32dbea3c01ca42e5073625bf30e54d73d3e012049adae1335a7d7306836fb3b3['--dataset_name', 'FR-FCM-ZZRQ', '--seed', '42']
+		8abcf17615eba3c46e0025bcf7ea735db58578b6d5436d093be2deff89139a04['--dataset_name', 'FR-FCM-Z2KP_healthy_final', '--seed', '420', '--sub-sampling', '1000']
+		f562545ba66d253235dbb203579508db0f412f380a03701274c9556dd816fabc['--dataset_name', 'FR-FCM-Z2KP_healthy_final', '--seed', '420', '--sub-sampling', '5000']
+		9e9156b0ebfabe83d9fba283a9e0a88f3b156b7a6a4e11ffc9e478acc79aa5ec['--dataset_name', 'FR-FCM-Z2KP_healthy_final', '--seed', '420', '--sub-sampling', '10000']
+		af04e10cb394230bfa8a4c8fca7e33877dd402bbc2cc37e4bb35f7854377282b['--dataset_name', 'FR-FCM-Z2KP_healthy_final', '--seed', '420', '--sub-sampling', '50000']
+		58a2626320b14f0ef131ea31f327bd77d0018e3aa0a6dcca535fe9c214d31189['--dataset_name', 'FR-FCM-Z2KP_healthy_final', '--seed', '420', '--sub-sampling', '100000']
+	end
+	params_data_import:::param --o data_import
+	subgraph params_data_preprocessing
+		3cd57f101f52cc8f1e65c10f45eaf594947077c8d9def5332ec922b6e338c80d['--max-workers', '8', '--num', '1']
+		9dd08836375b103e2223f5ed2ef89b109cd6fbc84f23cb9af6f288162657760c['--max-workers', '8', '--num', '2']
+		847bfb0d4a973df0f35c11bf99fb6e1b94f2357ab40f07caaf9534b6ad686016['--max-workers', '8', '--num', '3']
+		f4da8dc0c51bb7e3b609c1335cea939b4742db96f4b5b3c99873cbeca174a532['--max-workers', '8', '--num', '4']
+		34887b980ba1bc5c62edd21ce45ff723e243427e7d7c20d12ef05ee2521ca105['--max-workers', '8', '--num', '5']
+	end
+	params_data_preprocessing:::param --o data_preprocessing
+	subgraph params_gatemeclass
+		3c530339a11d8427b017a7815187a9925e6f400b3dc60e8c49021043cb0ad155['--GMM_parameterization', 'E', '--excluded-datasets', 'FR-FCM-Z3YR,flowcyt,FR-FCM-Z2KP_virus_final,FR-FCM-Z238_infection_final', '--k', '20', '--sampling', '0.1']
+		d51d2d4cdd7aa7a8932ed1b2ec95e100abe8ba09548fb2327f68b81dff72cd40['--GMM_parameterization', 'V', '--excluded-datasets', 'FR-FCM-Z3YR,flowcyt,FR-FCM-Z2KP_virus_final,FR-FCM-Z238_infection_final', '--k', '20', '--sampling', '0.1']
+	end
+	params_gatemeclass:::param --o gatemeclass
+	subgraph params_flow_metrics
+		dadab5202a25740a12202dc2663099e332909148727a8fb21454afc6cbec3010['--metric', 'all']
+	end
+	params_flow_metrics:::param --o flow_metrics
+
