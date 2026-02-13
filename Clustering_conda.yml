@@ -249,7 +249,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-knn
-      commit: c474cd950f513b3e257d67c5678021324f587973
+      commit: aba4a497ff704e4030b68fa92074b5ae4a6625c9
     parameters: []
   - id: lda
     name: LDA
