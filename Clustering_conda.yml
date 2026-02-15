@@ -247,8 +247,8 @@ stages:
     name: CyAnno
     software_environment: cyanno
     repository:
-      url: https://github.com/JavierHdCKU/ob-pipeline-cyanno
-      commit: 957f85015cfad7c06a6aa77777b896b86b43a07b
+      url: https://github.com/kaae-2/ob-pipeline-cyanno
+      commit: 3603834a79106ad95b8f73dcde2516e24bdfbd78
     parameters: []
   - id: knn
     name: KNN
