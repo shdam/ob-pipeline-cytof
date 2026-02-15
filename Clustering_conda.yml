@@ -49,267 +49,267 @@ software_environments:
     conda: envs/metrics_r.yml
     envmodule: metrics_r
 metric_collectors:
-  - id: metrics_report
-    name: Metrics report collector
-    software_environment: metrics_r
-    repository:
-      url: https://github.com/kaae-2/ob-metrics-collectors.git
-      commit: 33a30d5184002485ccf558324f7f937961082472
-    inputs:
-      - metrics.scores
-      - data.order
-    outputs:
-      - id: metrics.report
-        path: "{input}/metric_collectors/metrics_report/metrics_report.html"
-      - id: metrics.plots
-        path: "{input}/metric_collectors/metrics_report/metric_plots.tar.gz"
+- id: metrics_report
+  name: Metrics report collector
+  software_environment: metrics_r
+  repository:
+    url: https://github.com/kaae-2/ob-metrics-collectors.git
+    commit: 33a30d5184002485ccf558324f7f937961082472
+  inputs:
+  - metrics.scores
+  - data.order
+  outputs:
+  - id: metrics.report
+    path: '{input}/metric_collectors/metrics_report/metrics_report.html'
+  - id: metrics.plots
+    path: '{input}/metric_collectors/metrics_report/metric_plots.tar.gz'
 stages:
-  - id: data
-    modules:
-      - id: data_import
-        name: Prepared CyTOF CSV dataset from GitHub prepared folder
-        software_environment: py
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-data
-          commit: 056438fdaa2a8adeb0c46e056ba51556781f1f78
-        parameters:
-          - values:
-              - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - FR-FCM-Z2KP_virus_final
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - FR-FCM-Z238_infection_final
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - FR-FCM-Z3YR
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - Samusik
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - Transformed
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - Levine
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - flowcyt
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - panel_CD20
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - panel_CD56
-              - --seed
-              - "42"
-          - values:
-              - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
-              - --seed
-              - "420"
-              - --sub-sampling
-              - "1000"
-          - values:
-              - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
-              - --seed
-              - "420"
-              - --sub-sampling
-              - "5000"
-          - values:
-              - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
-              - --seed
-              - "420"
-              - --sub-sampling
-              - "10000"
-          - values:
-              - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
-              - --seed
-              - "420"
-              - --sub-sampling
-              - "50000"
-          - values:
-              - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
-              - --seed
-              - "420"
-              - --sub-sampling
-              - "100000"
-    outputs:
-      - id: data.raw
-        path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
-      - id: data.attachments
-        path: "{input}/{stage}/{module}/{params}/{dataset}.attachments.gz"
-      - id: data.order
-        path: "{input}/{stage}/{module}/{params}/{dataset}.order.json.gz"
-  - id: preprocessing
-    modules:
-      - id: data_preprocessing
-        name: Data preprocessing for CyTOF datasets
-        software_environment: py
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-preprocessing
-          commit: 608dfacf608251b84d75a0691cec96394c67e978
-        parameters:
-          - values:
-              - --num
-              - "1"
-              - --max-workers
-              - "8"
-          - values:
-              - --num
-              - "2"
-              - --max-workers
-              - "8"
-          - values:
-              - --num
-              - "3"
-              - --max-workers
-              - "8"
-          - values:
-              - --num
-              - "4"
-              - --max-workers
-              - "8"
-          - values:
-              - --num
-              - "5"
-              - --max-workers
-              - "8"
-    inputs:
-      - entries:
-          - data.raw
-          - data.attachments
-          - data.order
-    outputs:
-      - id: data.train_matrix
-        path: "{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz"
-      - id: data.train_labels
-        path: "{input}/{stage}/{module}/{params}/{dataset}.train.labels.tar.gz"
-      - id: data.test_matrix
-        path: "{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz"
-      - id: data.true_labels
-        path: "{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz"
-      - id: data.label_key
-        path: "{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz"
-  - id: analysis
-    inputs:
-      - entries:
-          - data.train_matrix
-          - data.train_labels
-          - data.test_matrix
-          - data.label_key
-    modules:
-      - id: dgcytof
-        name: DG-CyTOF
-        software_environment: dgcytof
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-dgcytof
-          commit: 87ea5753a99d27cda6eb4f536e96567317324758
-        parameters: []
-      - id: cygate
-        name: CyGATE
-        software_environment: bash
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-CyGATE
-          commit: 398b838d4333336b923c884cfc071f72cfebcb7c
-      - id: random
-        name: Random
-        software_environment: cran
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-random
-          commit: ad9ae22127188ba413ed3333cb8b0268a83bcdd6
-        parameters: []
-      - id: cyanno
-        name: CyAnno
-        software_environment: cyanno
-        repository:
-          url: https://github.com/JavierHdCKU/ob-pipeline-cyanno
-          commit: 957f85015cfad7c06a6aa77777b896b86b43a07b
-        parameters: []
-      - id: knn
-        name: KNN
-        software_environment: py
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-knn
-          commit: 39a3e1b6b53b07a6a97de7695be02fe93fd2bf1a
-        parameters: []
-      - id: lda
-        name: LDA
-        software_environment: cran
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-LDA
-          commit: 18f168fcbda7f172dfdcc5dbe9c610b4f1572c73
-        parameters: []
-      - id: gatemeclass
-        name: GateMeClass
-        software_environment: gatemeclass
-        repository:
-          url: https://github.com/kaae-2/GateMeClass_model
-          commit: 78915a25c536a93b4726a77f5ed2751e6778eec0
-        parameters:
-          - values:
-              - --GMM_parameterization
-              - E
-              - --sampling
-              - "0.1"
-              - --k
-              - "20"
-              - --excluded-datasets
-              - FR-FCM-Z3YR,flowcyt,FR-FCM-Z2KP_virus_final,FR-FCM-Z238_infection_final
-          - values:
-              - --GMM_parameterization
-              - V
-              - --sampling
-              - "0.1"
-              - --k
-              - "20"
-              - --excluded-datasets
-              - FR-FCM-Z3YR,flowcyt,FR-FCM-Z2KP_virus_final,FR-FCM-Z238_infection_final
-    outputs:
-      - id: analysis.prediction
-        path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz"
-  - id: metrics
-    modules:
-      - id: flow_metrics
-        name: benchmark metrics for flow/cytof data
-        software_environment: py
-        repository:
-          url: https://github.com/kaae-2/ob-pipeline-metrics
-          commit: 4c0d2ea3342c59c6776cc4b69884388ae72966e4
-        parameters:
-          - values:
-              - --metric
-              - all
-    inputs:
-      - entries:
-          - analysis.prediction
-          - data.true_labels
-          - data.label_key
-          - data.order
-    outputs:
-      - id: metrics.scores
-        path: "{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz"
+- id: data
+  modules:
+  - id: data_import
+    name: Prepared CyTOF CSV dataset from GitHub prepared folder
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-data
+      commit: 056438fdaa2a8adeb0c46e056ba51556781f1f78
+    parameters:
+    - values:
+      - --dataset_name
+      - FR-FCM-Z2KP_healthy_final
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - FR-FCM-Z2KP_virus_final
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - FR-FCM-Z238_infection_final
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - FR-FCM-Z3YR
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - Samusik
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - Transformed
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - Levine
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - flowcyt
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - panel_CD20
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - panel_CD56
+      - --seed
+      - '42'
+    - values:
+      - --dataset_name
+      - FR-FCM-Z2KP_healthy_final
+      - --seed
+      - '420'
+      - --sub-sampling
+      - '1000'
+    - values:
+      - --dataset_name
+      - FR-FCM-Z2KP_healthy_final
+      - --seed
+      - '420'
+      - --sub-sampling
+      - '5000'
+    - values:
+      - --dataset_name
+      - FR-FCM-Z2KP_healthy_final
+      - --seed
+      - '420'
+      - --sub-sampling
+      - '10000'
+    - values:
+      - --dataset_name
+      - FR-FCM-Z2KP_healthy_final
+      - --seed
+      - '420'
+      - --sub-sampling
+      - '50000'
+    - values:
+      - --dataset_name
+      - FR-FCM-Z2KP_healthy_final
+      - --seed
+      - '420'
+      - --sub-sampling
+      - '100000'
+  outputs:
+  - id: data.raw
+    path: '{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz'
+  - id: data.attachments
+    path: '{input}/{stage}/{module}/{params}/{dataset}.attachments.gz'
+  - id: data.order
+    path: '{input}/{stage}/{module}/{params}/{dataset}.order.json.gz'
+- id: preprocessing
+  modules:
+  - id: data_preprocessing
+    name: Data preprocessing for CyTOF datasets
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-preprocessing
+      commit: 608dfacf608251b84d75a0691cec96394c67e978
+    parameters:
+    - values:
+      - --num
+      - '1'
+      - --max-workers
+      - '8'
+    - values:
+      - --num
+      - '2'
+      - --max-workers
+      - '8'
+    - values:
+      - --num
+      - '3'
+      - --max-workers
+      - '8'
+    - values:
+      - --num
+      - '4'
+      - --max-workers
+      - '8'
+    - values:
+      - --num
+      - '5'
+      - --max-workers
+      - '8'
+  inputs:
+  - entries:
+    - data.raw
+    - data.attachments
+    - data.order
+  outputs:
+  - id: data.train_matrix
+    path: '{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz'
+  - id: data.train_labels
+    path: '{input}/{stage}/{module}/{params}/{dataset}.train.labels.tar.gz'
+  - id: data.test_matrix
+    path: '{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz'
+  - id: data.true_labels
+    path: '{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz'
+  - id: data.label_key
+    path: '{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz'
+- id: analysis
+  inputs:
+  - entries:
+    - data.train_matrix
+    - data.train_labels
+    - data.test_matrix
+    - data.label_key
+  modules:
+  - id: dgcytof
+    name: DG-CyTOF
+    software_environment: dgcytof
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-dgcytof
+      commit: 6bc44f46e9a8c7d55257df1810f17ba5f7299888
+    parameters: []
+  - id: cygate
+    name: CyGATE
+    software_environment: bash
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-CyGATE
+      commit: efb95b839c4dc1c57d03c24be723025be9536475
+  - id: random
+    name: Random
+    software_environment: cran
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-random
+      commit: cc20ffb9af813b6dba1a43a3eca6bb3be0bd55b8
+    parameters: []
+  - id: cyanno
+    name: CyAnno
+    software_environment: cyanno
+    repository:
+      url: https://github.com/JavierHdCKU/ob-pipeline-cyanno
+      commit: 957f85015cfad7c06a6aa77777b896b86b43a07b
+    parameters: []
+  - id: knn
+    name: KNN
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-knn
+      commit: aaa711335040550376d510f60c4a7436d49e2da5
+    parameters: []
+  - id: lda
+    name: LDA
+    software_environment: cran
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-LDA
+      commit: b9f32f30e5504e96d3bfa5c66c1fdd15387b8b5b
+    parameters: []
+  - id: gatemeclass
+    name: GateMeClass
+    software_environment: gatemeclass
+    repository:
+      url: https://github.com/kaae-2/GateMeClass_model
+      commit: 78915a25c536a93b4726a77f5ed2751e6778eec0
+    parameters:
+    - values:
+      - --GMM_parameterization
+      - E
+      - --sampling
+      - '0.1'
+      - --k
+      - '20'
+      - --excluded-datasets
+      - FR-FCM-Z3YR,flowcyt,FR-FCM-Z2KP_virus_final,FR-FCM-Z238_infection_final
+    - values:
+      - --GMM_parameterization
+      - V
+      - --sampling
+      - '0.1'
+      - --k
+      - '20'
+      - --excluded-datasets
+      - FR-FCM-Z3YR,flowcyt,FR-FCM-Z2KP_virus_final,FR-FCM-Z238_infection_final
+  outputs:
+  - id: analysis.prediction
+    path: '{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz'
+- id: metrics
+  modules:
+  - id: flow_metrics
+    name: benchmark metrics for flow/cytof data
+    software_environment: py
+    repository:
+      url: https://github.com/kaae-2/ob-pipeline-metrics
+      commit: 4c0d2ea3342c59c6776cc4b69884388ae72966e4
+    parameters:
+    - values:
+      - --metric
+      - all
+  inputs:
+  - entries:
+    - analysis.prediction
+    - data.true_labels
+    - data.label_key
+    - data.order
+  outputs:
+  - id: metrics.scores
+    path: '{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz'
