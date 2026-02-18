@@ -81,15 +81,20 @@ CYGATE_JAVA_XMS=512m CYGATE_JAVA_XMX=6g \
 GATEMECLASS_CORES=1 GATEMECLASS_BLAS_THREADS=1 \
 KNN_N_JOBS="$(( $(nproc) - 2 ))" \
 ob run benchmark -b Clustering_conda.yml --local-storage --cores "$(nproc)" \
-  --default-resources mem_mb=52000 \
+  --default-resources mem_mb=20000 \
   --resources mem_mb=52000 \
-  --set-resources analysis_knn_default:mem_mb=10000 analysis_cygate_default:mem_mb=10000 analysis_random_default:mem_mb=10000 analysis_dgcytof_default:mem_mb=10000 analysis_lda_default:mem_mb=10000
+  --set-resources analysis_knn_default:mem_mb=10000 analysis_cygate_default:mem_mb=10000 analysis_random_default:mem_mb=10000 analysis_dgcytof_default:mem_mb=10000 analysis_lda_default:mem_mb=10000 metrics_flow_metrics_default:mem_mb=8000 metrics_flow_metrics_.dadab5202a25740a12202dc2663099e332909148727a8fb21454afc6cbec3010:mem_mb=8000
 ```
 
 Parameters used in `justfile` in this repository:
 
 - `just run` -> `--cores 4`
 - `just dry-run` -> `--dry-run`
+- Default per-job memory (`--default-resources`): `20000` MB
+- Total memory pool (`--resources mem_mb`): `52000` MB
+- Metrics memory cap: `8000` MB for both
+  `metrics_flow_metrics_default` and
+  `metrics_flow_metrics_.dadab5202a25740a12202dc2663099e332909148727a8fb21454afc6cbec3010`
 
 ## Extending or using the tool
 
