@@ -1,7 +1,187 @@
-# OMNIBENCHMARK
+# Benchmark Repository
 
-## TODO
+## What this repository is about
 
-[] Reimplement metrics generation repo
-[] Define python and R environments
-[] Set up individual repos for each of the tools to be tested
+This repository defines the Omnibenchmark CyTOF workflow and execution config.
+It contains:
+
+- the benchmark topology (`Clustering_conda.yml`),
+- pinned module repositories/commits,
+- environment specs in `envs/`, and
+- convenience commands in `justfile`.
+
+The pipeline orchestrates data import, preprocessing, model analysis, metrics,
+and metrics collection.
+
+## How it works in Omnibenchmark
+
+`ob run benchmark -b Clustering_conda.yml` executes the full DAG.
+
+Data flow:
+
+1. `data` -> `{name}.data.tar.gz`, `{name}.order.json.gz`, attachments
+2. `preprocessing` -> train/test matrix + label tarballs + `label_key`
+3. `analysis` -> `{model}_predicted_labels.tar.gz`
+4. `metrics` -> `{name}.flow_metrics.json.gz`
+5. `metric_collectors` -> HTML report + TSV summaries + plot archive
+
+## Local environment setup (small quickstart)
+
+Example conda setup for running Omnibenchmark CLI locally:
+
+```bash
+conda create -n omnibenchmark python=3.11 -y
+conda activate omnibenchmark
+python -m pip install --upgrade pip
+python -m pip install omnibenchmark
+```
+
+Optional helper tools:
+
+```bash
+python -m pip install just
+```
+
+Verify CLI:
+
+```bash
+ob --help
+```
+
+Useful Omnibenchmark docs:
+
+- Docs home: <https://docs.omnibenchmark.org/latest/>
+- CLI reference: <https://docs.omnibenchmark.org/latest/reference/>
+- Tutorials: <https://docs.omnibenchmark.org/latest/tutorial/>
+- Project site: <https://omnibenchmark.org>
+
+## How to run
+
+From this `benchmark/` directory:
+
+```bash
+just dry-run
+just run
+```
+
+Equivalent full CLI commands:
+
+```bash
+ob run benchmark -b Clustering_conda.yml --local-storage --dry-run
+ob run benchmark -b Clustering_conda.yml --local-storage --cores 4
+```
+
+## Resource-controlled run command
+
+For larger runs, use explicit limits in one command:
+
+```bash
+TMPDIR="$HOME/tmp" CONDA_PKGS_DIRS="$HOME/conda-pkgs" \
+CYGATE_JAVA_XMS=512m CYGATE_JAVA_XMX=6g \
+GATEMECLASS_CORES=1 GATEMECLASS_BLAS_THREADS=1 \
+KNN_N_JOBS="$(( $(nproc) - 2 ))" \
+ob run benchmark -b Clustering_conda.yml --local-storage --cores "$(nproc)" \
+  --default-resources mem_mb=52000 \
+  --resources mem_mb=52000 \
+  --set-resources analysis_knn_default:mem_mb=10000 analysis_cygate_default:mem_mb=10000 analysis_random_default:mem_mb=10000 analysis_dgcytof_default:mem_mb=10000 analysis_lda_default:mem_mb=10000
+```
+
+Parameters used in `justfile` in this repository:
+
+- `just run` -> `--cores 4`
+- `just dry-run` -> `--dry-run`
+
+## Extending or using the tool
+
+1. Edit `Clustering_conda.yml` to add/change stages, params, or module pins.
+2. Add/update software env specs under `envs/`.
+3. Keep module CLI input ids aligned with YAML input ids.
+4. Validate with dry-run before full execution.
+
+### Code example: add a new analysis tool
+
+Add a software environment under `software_environments` and a module under
+`stages.analysis.modules`.
+
+```yaml
+software_environments:
+  my_tool_env:
+    description: My tool environment
+    conda: envs/my_tool.yml
+    envmodule: my_tool_env
+
+stages:
+  - id: analysis
+    inputs:
+      - entries:
+          - data.train_matrix
+          - data.train_labels
+          - data.test_matrix
+          - data.label_key
+    modules:
+      - id: my_tool
+        name: My Tool
+        software_environment: my_tool_env
+        repository:
+          url: https://github.com/<your-org>/ob-pipeline-my-tool.git
+          commit: <pinned-commit-sha>
+        parameters:
+          - values: [--some-param, value]
+    outputs:
+      - id: analysis.prediction
+        path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz"
+```
+
+Tool implementation contract (analysis stage):
+
+- Mandatory inputs:
+  - `--name`
+  - `--output_dir`
+- Stage inputs (all current `stages.analysis.inputs.entries`):
+  - `--data.train_matrix`
+  - `--data.train_labels`
+  - `--data.test_matrix`
+  - `--data.label_key`
+- Configurable inputs:
+  - anything you add under `modules[].parameters[].values` (for example
+    `--some-param value`)
+
+Expected output:
+
+- Filename your tool must write: `${output_dir}/${name}_predicted_labels.tar.gz`
+- Benchmark output mapping (from `Clustering_conda.yml`):
+  `analysis.prediction -> {input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz`
+
+Example invocation shape your tool should support:
+
+```bash
+python run_my_tool.py \
+  --name my_tool \
+  --output_dir out/data/analysis/default/my_tool \
+  --data.train_matrix out/data/data_preprocessing/default/data_import.train.matrix.tar.gz \
+  --data.train_labels out/data/data_preprocessing/default/data_import.train.labels.tar.gz \
+  --data.test_matrix out/data/data_preprocessing/default/data_import.test.matrices.tar.gz \
+  --data.label_key out/data/data_preprocessing/default/data_import.label_key.json.gz \
+  --some-param value
+```
+
+## Adding datasets
+
+1. Add dataset entries/params in the data stage of `Clustering_conda.yml`.
+2. Ensure the `data` module can import that dataset.
+3. Run dry-run, then run a bounded test execution.
+
+Dataset source and loading references:
+
+- Dataset repository: <https://github.com/kaae-2/ob-flow-datasets>
+- Prepared datasets folder: <https://github.com/kaae-2/ob-flow-datasets/tree/main/prepared>
+- Dataset import/packaging implementation: <https://github.com/kaae-2/ob-pipeline-data/blob/main/data_import.py>
+- Import runner script: <https://github.com/kaae-2/ob-pipeline-data/blob/main/run_data_import.sh>
+
+## Forking this toolchain
+
+1. Fork the module repositories you want to maintain.
+2. Update repository URLs/commits in `Clustering_conda.yml`.
+3. Keep module CLIs compatible with current input ids (or update dependent ids
+   consistently).
+4. Re-run dry-run and one full end-to-end execution.
