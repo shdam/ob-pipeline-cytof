@@ -57,18 +57,9 @@ Useful Omnibenchmark docs:
 
 ## How to run
 
-From this `benchmark/` directory:
-
-```bash
-just dry-run
-just run
-```
-
-Equivalent full CLI commands:
-
 ```bash
 ob run benchmark -b Clustering_conda.yml --local-storage --dry-run
-ob run benchmark -b Clustering_conda.yml --local-storage --cores 4
+ob run benchmark -b Clustering_conda.yml --local-storage --cores 6
 ```
 
 ## Resource-controlled run command
@@ -86,22 +77,20 @@ ob run benchmark -b Clustering_conda.yml --local-storage --cores "$(nproc)" \
   --set-resources analysis_knn_default:mem_mb=10000 analysis_cygate_default:mem_mb=10000 analysis_random_default:mem_mb=10000 analysis_dgcytof_default:mem_mb=10000 analysis_lda_default:mem_mb=10000 metrics_flow_metrics_default:mem_mb=8000 metrics_flow_metrics_.dadab5202a25740a12202dc2663099e332909148727a8fb21454afc6cbec3010:mem_mb=8000
 ```
 
-Parameters used in `justfile` in this repository:
+Parameters used:
 
-- `just run` -> `--cores 4`
+- `just run` -> `--cores 6`
 - `just dry-run` -> `--dry-run`
 - Default per-job memory (`--default-resources`): `20000` MB
 - Total memory pool (`--resources mem_mb`): `52000` MB
-- Metrics memory cap: `8000` MB for both
-  `metrics_flow_metrics_default` and
-  `metrics_flow_metrics_.dadab5202a25740a12202dc2663099e332909148727a8fb21454afc6cbec3010`
 
 ## Extending or using the tool
 
 1. Edit `Clustering_conda.yml` to add/change stages, params, or module pins.
 2. Add/update software env specs under `envs/`.
 3. Keep module CLI input ids aligned with YAML input ids.
-4. Validate with dry-run before full execution.
+4. Omnibenchmark uses specific commit hashes to pull modules which needs to be pinned in the YAML file. 
+5. Validate with dry-run before full execution.
 
 ### Code example: add a new analysis tool
 
