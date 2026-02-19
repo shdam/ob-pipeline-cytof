@@ -72,18 +72,35 @@ CYGATE_JAVA_XMS=512m CYGATE_JAVA_XMX=6g \
 GATEMECLASS_CORES=1 GATEMECLASS_BLAS_THREADS=1 \
 KNN_N_JOBS="$(( $(nproc) - 2 ))" \
 ob run benchmark -b Clustering_conda.yml --local-storage --cores "$(nproc)" \
-  --default-resources mem_mb=20000 \
+  --default-resources mem_mb=12000 \
   --resources mem_mb=52000 \
-  --set-resources analysis_knn_default:mem_mb=10000 analysis_cygate_default:mem_mb=10000 analysis_random_default:mem_mb=10000 analysis_dgcytof_default:mem_mb=10000 analysis_lda_default:mem_mb=10000 metrics_flow_metrics_default:mem_mb=8000
+  --set-resources \
+  analysis_knn_default:mem_mb=10000 \
+  analysis_cygate_default:mem_mb=10000 \
+  analysis_random_default:mem_mb=10000 \
+  analysis_dgcytof_default:mem_mb=10000 \
+  analysis_lda_default:mem_mb=10000 \
+  analysis_gatemeclass_.3c530339a11d8427b017a7815187a9925e6f400b3dc60e8c49021043cb0ad155:mem_mb=5000 \
+  analysis_gatemeclass_.d51d2d4cdd7aa7a8932ed1b2ec95e100abe8ba09548fb2327f68b81dff72cd40:mem_mb=5000 \
+  preprocessing_data_preprocessing_.34887b980ba1bc5c62edd21ce45ff723e243427e7d7c20d12ef05ee2521ca105:mem_mb=3500 \
+  preprocessing_data_preprocessing_.3cd57f101f52cc8f1e65c10f45eaf594947077c8d9def5332ec922b6e338c80d:mem_mb=3500 \
+  preprocessing_data_preprocessing_.847bfb0d4a973df0f35c11bf99fb6e1b94f2357ab40f07caaf9534b6ad686016:mem_mb=3500 \
+  preprocessing_data_preprocessing_.9dd08836375b103e2223f5ed2ef89b109cd6fbc84f23cb9af6f288162657760c:mem_mb=3500 \
+  preprocessing_data_preprocessing_.f4da8dc0c51bb7e3b609c1335cea939b4742db96f4b5b3c99873cbeca174a532:mem_mb=3500 \
+  metrics_flow_metrics_default:mem_mb=8000
 ```
 
 Parameters used:
 
 - `just run` -> `--cores 6`
 - `just dry-run` -> `--dry-run`
-- Default per-job memory (`--default-resources`): `20000` MB
+- Default per-job memory (`--default-resources`): `12000` MB
 - Total memory pool (`--resources mem_mb`): `52000` MB
-- Metrics memory cap: `metrics_flow_metrics_default:mem_mb=8000`
+- Model-specific caps:
+  - `analysis_knn_default`, `analysis_cygate_default`, `analysis_random_default`, `analysis_dgcytof_default`, `analysis_lda_default` -> `10000` MB
+  - `analysis_gatemeclass_.3c530339...`, `analysis_gatemeclass_.d51d2d4c...` -> `5000` MB
+  - `metrics_flow_metrics_default` -> `8000` MB
+  - `preprocessing_data_preprocessing_.*` (5 known parameter hashes) -> `3500` MB
 
 ## Extending or using the tool
 
