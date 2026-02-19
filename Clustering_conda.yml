@@ -290,10 +290,7 @@ stages:
     repository:
       url: https://github.com/kaae-2/ob-pipeline-metrics
       commit: 66b223cf86eec6729f783ed0b21849891fc0b3e5
-    parameters:
-    - values:
-      - --metric
-      - all
+    parameters: []
   inputs:
   - entries:
     - analysis.prediction

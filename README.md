@@ -74,7 +74,7 @@ KNN_N_JOBS="$(( $(nproc) - 2 ))" \
 ob run benchmark -b Clustering_conda.yml --local-storage --cores "$(nproc)" \
   --default-resources mem_mb=20000 \
   --resources mem_mb=52000 \
-  --set-resources analysis_knn_default:mem_mb=10000 analysis_cygate_default:mem_mb=10000 analysis_random_default:mem_mb=10000 analysis_dgcytof_default:mem_mb=10000 analysis_lda_default:mem_mb=10000 metrics_flow_metrics_default:mem_mb=8000 metrics_flow_metrics_.dadab5202a25740a12202dc2663099e332909148727a8fb21454afc6cbec3010:mem_mb=8000
+  --set-resources analysis_knn_default:mem_mb=10000 analysis_cygate_default:mem_mb=10000 analysis_random_default:mem_mb=10000 analysis_dgcytof_default:mem_mb=10000 analysis_lda_default:mem_mb=10000 metrics_flow_metrics_default:mem_mb=8000
 ```
 
 Parameters used:
@@ -83,6 +83,7 @@ Parameters used:
 - `just dry-run` -> `--dry-run`
 - Default per-job memory (`--default-resources`): `20000` MB
 - Total memory pool (`--resources mem_mb`): `52000` MB
+- Metrics memory cap: `metrics_flow_metrics_default:mem_mb=8000`
 
 ## Extending or using the tool
 
