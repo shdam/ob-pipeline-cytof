@@ -75,20 +75,20 @@ ob run benchmark -b Clustering_conda.yml --local-storage --cores "$(nproc)" \
   --default-resources mem_mb=12000 \
   --resources mem_mb=52000 \
   --set-resources \
-  analysis_knn_default:mem_mb=7000 \
-  analysis_cygate_default:mem_mb=8000 \
+  analysis_knn_default:mem_mb=11000 \
+  analysis_cygate_default:mem_mb=7500 \
   analysis_random_default:mem_mb=1000 \
-  analysis_dgcytof_default:mem_mb=8000 \
-  analysis_cyanno_default:mem_mb=5500 \
-  analysis_lda_default:mem_mb=2000 \
-  analysis_gatemeclass_.3c530339a11d8427b017a7815187a9925e6f400b3dc60e8c49021043cb0ad155:mem_mb=5000 \
-  analysis_gatemeclass_.d51d2d4cdd7aa7a8932ed1b2ec95e100abe8ba09548fb2327f68b81dff72cd40:mem_mb=5000 \
-  preprocessing_data_preprocessing_.34887b980ba1bc5c62edd21ce45ff723e243427e7d7c20d12ef05ee2521ca105:mem_mb=3500 \
-  preprocessing_data_preprocessing_.3cd57f101f52cc8f1e65c10f45eaf594947077c8d9def5332ec922b6e338c80d:mem_mb=3500 \
-  preprocessing_data_preprocessing_.847bfb0d4a973df0f35c11bf99fb6e1b94f2357ab40f07caaf9534b6ad686016:mem_mb=3500 \
-  preprocessing_data_preprocessing_.9dd08836375b103e2223f5ed2ef89b109cd6fbc84f23cb9af6f288162657760c:mem_mb=3500 \
-  preprocessing_data_preprocessing_.f4da8dc0c51bb7e3b609c1335cea939b4742db96f4b5b3c99873cbeca174a532:mem_mb=3500 \
-  metrics_flow_metrics_default:mem_mb=2000
+  analysis_dgcytof_default:mem_mb=7000 \
+  analysis_cyanno_default:mem_mb=6000 \
+  analysis_lda_default:mem_mb=2500 \
+  analysis_gatemeclass_.3c530339a11d8427b017a7815187a9925e6f400b3dc60e8c49021043cb0ad155:mem_mb=5500 \
+  analysis_gatemeclass_.d51d2d4cdd7aa7a8932ed1b2ec95e100abe8ba09548fb2327f68b81dff72cd40:mem_mb=5500 \
+  preprocessing_data_preprocessing_.34887b980ba1bc5c62edd21ce45ff723e243427e7d7c20d12ef05ee2521ca105:mem_mb=4500 \
+  preprocessing_data_preprocessing_.3cd57f101f52cc8f1e65c10f45eaf594947077c8d9def5332ec922b6e338c80d:mem_mb=4500 \
+  preprocessing_data_preprocessing_.847bfb0d4a973df0f35c11bf99fb6e1b94f2357ab40f07caaf9534b6ad686016:mem_mb=4500 \
+  preprocessing_data_preprocessing_.9dd08836375b103e2223f5ed2ef89b109cd6fbc84f23cb9af6f288162657760c:mem_mb=4500 \
+  preprocessing_data_preprocessing_.f4da8dc0c51bb7e3b609c1335cea939b4742db96f4b5b3c99873cbeca174a532:mem_mb=4500 \
+  metrics_flow_metrics_default:mem_mb=2500
 ```
 
 Parameters used:
@@ -98,14 +98,15 @@ Parameters used:
 - Default per-job memory (`--default-resources`): `12000` MB
 - Total memory pool (`--resources mem_mb`): `52000` MB
 - Model-specific caps:
-  - `analysis_cygate_default`, `analysis_dgcytof_default` -> `8000` MB
-  - `analysis_knn_default` -> `7000` MB
-  - `analysis_cyanno_default` -> `5500` MB
-  - `analysis_gatemeclass_.3c530339...`, `analysis_gatemeclass_.d51d2d4c...` -> `5000` MB
-  - `analysis_lda_default` -> `2000` MB
+  - `analysis_knn_default` -> `11000` MB
+  - `analysis_cygate_default` -> `7500` MB
+  - `analysis_dgcytof_default` -> `7000` MB
+  - `analysis_cyanno_default` -> `6000` MB
+  - `analysis_gatemeclass_.3c530339...`, `analysis_gatemeclass_.d51d2d4c...` -> `5500` MB
+  - `analysis_lda_default` -> `2500` MB
   - `analysis_random_default` -> `1000` MB
-  - `metrics_flow_metrics_default` -> `2000` MB
-  - `preprocessing_data_preprocessing_.*` (5 known parameter hashes) -> `3500` MB
+  - `metrics_flow_metrics_default` -> `2500` MB
+  - `preprocessing_data_preprocessing_.*` (5 known parameter hashes) -> `4500` MB
 
 ## Extending or using the tool
 
