@@ -151,8 +151,6 @@ stages:
     outputs:
       - id: data.raw
         path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
-      - id: data.attachments
-        path: "{input}/{stage}/{module}/{params}/{dataset}.attachments.gz"
       - id: data.order
         path: "{input}/{stage}/{module}/{params}/{dataset}.order.json.gz"
   - id: preprocessing
@@ -190,9 +188,8 @@ stages:
               - --max-workers
               - "8"
     inputs:
-      - entries:
+        - entries:
           - data.raw
-          - data.attachments
           - data.order
     outputs:
       - id: data.train_matrix
