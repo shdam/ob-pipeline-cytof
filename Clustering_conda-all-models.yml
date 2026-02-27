@@ -74,17 +74,17 @@ stages:
         parameters:
           - values:
               - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
+              - FR-FCM-Z2KP-healthy
               - --seed
               - "42"
           - values:
               - --dataset_name
-              - FR-FCM-Z2KP_virus_final
+              - FR-FCM-Z2KP-covid
               - --seed
               - "42"
           - values:
               - --dataset_name
-              - FR-FCM-Z238_infection_final
+              - FR-FCM-Z238
               - --seed
               - "42"
           - values:

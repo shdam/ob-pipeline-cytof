@@ -75,17 +75,17 @@ stages:
         parameters:
           - values:
               - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
+              - FR-FCM-Z2KP-healthy
               - --seed
               - "42"
           - values:
               - --dataset_name
-              - FR-FCM-Z2KP_virus_final
+              - FR-FCM-Z2KP-covid
               - --seed
               - "42"
           - values:
               - --dataset_name
-              - FR-FCM-Z238_infection_final
+              - FR-FCM-Z238
               - --seed
               - "42"
           - values:
@@ -110,40 +110,40 @@ stages:
               - "42"
           - values:
               - --dataset_name
-              - flowcyt
+              - FlowCyt
               - --seed
               - "42"
           - values:
               - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
+              - FR-FCM-Z2KP-healthy
               - --seed
               - "420"
               - --sub-sampling
               - "1000"
           - values:
               - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
+              - FR-FCM-Z2KP-healthy
               - --seed
               - "420"
               - --sub-sampling
               - "5000"
           - values:
               - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
+              - FR-FCM-Z2KP-healthy
               - --seed
               - "420"
               - --sub-sampling
               - "10000"
           - values:
               - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
+              - FR-FCM-Z2KP-healthy
               - --seed
               - "420"
               - --sub-sampling
               - "50000"
           - values:
               - --dataset_name
-              - FR-FCM-Z2KP_healthy_final
+              - FR-FCM-Z2KP-healthy
               - --seed
               - "420"
               - --sub-sampling
@@ -269,7 +269,7 @@ stages:
               - --k
               - "20"
               - --excluded-datasets
-              - FR-FCM-Z3YR,flowcyt,FR-FCM-Z2KP_virus_final,FR-FCM-Z238_infection_final
+              - FR-FCM-Z3YR,FlowCyt,FR-FCM-Z2KP-covid,FR-FCM-Z238
           - values:
               - --GMM_parameterization
               - V
@@ -278,7 +278,7 @@ stages:
               - --k
               - "20"
               - --excluded-datasets
-              - FR-FCM-Z3YR,flowcyt,FR-FCM-Z2KP_virus_final,FR-FCM-Z238_infection_final
+              - FR-FCM-Z3YR,FlowCyt,FR-FCM-Z2KP-covid,FR-FCM-Z238
     outputs:
       - id: analysis.prediction
         path: "{input}/{stage}/{module}/{params}/{dataset}_predicted_labels.tar.gz"
