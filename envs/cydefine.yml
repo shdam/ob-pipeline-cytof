@@ -1,0 +1,15 @@
+name: cydefine
+channels:
+  - conda-forge
+  - r
+  - bioconda
+  - nodefaults
+dependencies:
+  - conda-forge::r-base=4.4.3
+  - r-argparse
+  - r-dplyr
+  - r-statmod
+  - r-remotes
+  - conda-forge::r-biocmanager
+  - bioconductor-sva
+  - bioconductor-biobase
