@@ -246,7 +246,7 @@ stages:
     software_environment: cydefine
     repository:
       url: https://github.com/shdam/ob-pipeline-cydefine
-      commit: 
+      commit: edfb499ed91a02d846abd2dd5adb66b2afc92b84
     parameters: []
   - id: knn
     name: KNN
