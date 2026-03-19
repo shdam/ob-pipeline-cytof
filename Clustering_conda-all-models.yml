@@ -119,6 +119,24 @@ stages:
         path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
       - id: data.order
         path: "{input}/{stage}/{module}/{params}/{dataset}.order.json.gz"
+  - id: stratify
+    modules:
+      - id: data_stratify
+        name: Stratify imported CyTOF datasets
+        software_environment: py
+        repository:
+          url: https://github.com/kaae-2/ob-stratify.git
+          commit: 3335516d48b84345cf13715efc02ef53e030519c
+        parameters: []
+    inputs:
+      - entries:
+          - data.raw
+          - data.order
+    outputs:
+      - id: data.stratified_raw
+        path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
+      - id: data.stratified_order
+        path: "{input}/{stage}/{module}/{params}/{dataset}.order.json.gz"
   - id: preprocessing
     modules:
       - id: data_preprocessing
@@ -145,8 +163,8 @@ stages:
               - "5"
     inputs:
         - entries:
-          - data.raw
-          - data.order
+          - data.stratified_raw
+          - data.stratified_order
     outputs:
       - id: data.train_matrix
         path: "{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz"
