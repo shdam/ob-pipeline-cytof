@@ -77,31 +77,43 @@ stages:
               - FR-FCM-Z2KP-healthy
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP-covid
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
           - values:
               - --dataset_name
               - FR-FCM-Z238
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
           - values:
               - --dataset_name
               - FR-FCM-Z3YR
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
           - values:
               - --dataset_name
               - Samusik
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
           - values:
               - --dataset_name
               - Transformed
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
     outputs:
       - id: data.raw
         path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
