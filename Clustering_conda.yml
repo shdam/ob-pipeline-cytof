@@ -80,6 +80,8 @@ stages:
               - "42"
               - --transformation-cofactor
               - "150"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP-covid
@@ -87,6 +89,8 @@ stages:
               - "42"
               - --transformation-cofactor
               - "150"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - FR-FCM-Z238
@@ -94,6 +98,8 @@ stages:
               - "42"
               - --transformation-cofactor
               - "5"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - FR-FCM-Z3YR
@@ -101,6 +107,8 @@ stages:
               - "42"
               - --transformation-cofactor
               - "5"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - Samusik
@@ -108,6 +116,8 @@ stages:
               - "42"
               - --transformation-cofactor
               - "5"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - BodenmillerXL
@@ -115,6 +125,8 @@ stages:
               - "42"
               - --transformation-cofactor
               - "5"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - Levine
@@ -122,6 +134,8 @@ stages:
               - "42"
               - --transformation-cofactor
               - "5"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - FlowCyt
@@ -129,6 +143,8 @@ stages:
               - "42"
               - --transformation-cofactor
               - "150"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP-healthy
@@ -138,6 +154,8 @@ stages:
               - "1000"
               - --transformation-cofactor
               - "150"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP-healthy
@@ -147,6 +165,8 @@ stages:
               - "5000"
               - --transformation-cofactor
               - "150"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP-healthy
@@ -156,6 +176,8 @@ stages:
               - "10000"
               - --transformation-cofactor
               - "150"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP-healthy
@@ -165,6 +187,8 @@ stages:
               - "50000"
               - --transformation-cofactor
               - "150"
+              - --potential-batches
+              - "1"
           - values:
               - --dataset_name
               - FR-FCM-Z2KP-healthy
@@ -174,6 +198,8 @@ stages:
               - "100000"
               - --transformation-cofactor
               - "150"
+              - --potential-batches
+              - "1"
     outputs:
       - id: data.raw
         path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
@@ -259,24 +285,27 @@ stages:
           - data.test_matrix
           - data.true_labels
           - data.label_key
+          - data.order
     outputs:
-      - id: data.stratified_train_matrix
+      - id: data.post_stratify_train_matrix
         path: "{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz"
-      - id: data.stratified_train_labels
+      - id: data.post_stratify_train_labels
         path: "{input}/{stage}/{module}/{params}/{dataset}.train.labels.tar.gz"
-      - id: data.stratified_test_matrix
+      - id: data.post_stratify_test_matrix
         path: "{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz"
-      - id: data.stratified_true_labels
+      - id: data.post_stratify_true_labels
         path: "{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz"
-      - id: data.stratified_label_key
+      - id: data.post_stratify_label_key
         path: "{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz"
+      - id: data.post_stratify_order
+        path: "{input}/{stage}/{module}/{params}/{dataset}.order.json.gz"
   - id: analysis
     inputs:
       - entries:
-          - data.stratified_train_matrix
-          - data.stratified_train_labels
-          - data.stratified_test_matrix
-          - data.stratified_label_key
+          - data.post_stratify_train_matrix
+          - data.post_stratify_train_labels
+          - data.post_stratify_test_matrix
+          - data.post_stratify_label_key
     modules:
       - id: dgcytof
         name: DG-CyTOF
@@ -359,9 +388,9 @@ stages:
     inputs:
       - entries:
           - analysis.prediction
-          - data.stratified_true_labels
-          - data.stratified_label_key
-          - data.order
+          - data.post_stratify_true_labels
+          - data.post_stratify_label_key
+          - data.post_stratify_order
     outputs:
       - id: metrics.scores
         path: "{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz"
