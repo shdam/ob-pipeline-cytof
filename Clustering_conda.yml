@@ -280,15 +280,15 @@ stages:
     - data.raw
     - data.order
   outputs:
-  - id: data.train_matrix
+  - id: data.pre_train_matrix
     path: '{input}/{stage}/{module}/{params}/data_preprocessing.train.matrix.tar.gz'
-  - id: data.train_labels
+  - id: data.pre_train_labels
     path: '{input}/{stage}/{module}/{params}/data_preprocessing.train.labels.tar.gz'
-  - id: data.test_matrix
+  - id: data.pre_test_matrix
     path: '{input}/{stage}/{module}/{params}/data_preprocessing.test.matrices.tar.gz'
-  - id: data.true_labels
+  - id: data.pre_true_labels
     path: '{input}/{stage}/{module}/{params}/data_preprocessing.test.labels.tar.gz'
-  - id: data.label_key
+  - id: data.pre_label_key
     path: '{input}/{stage}/{module}/{params}/data_preprocessing.label_key.json.gz'
 - id: stratify
   modules:
@@ -297,7 +297,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-stratify.git
-      commit: 58d322e459c1308673325cf7e669ce2ca329a20a
+      commit: ced6d66b1f5206aa5323b9bdc2d1afe37981b290
     parameters:
     - values:
       - --drop-ungated-training
@@ -316,32 +316,32 @@ stages:
       - 'true'
   inputs:
   - entries:
-    - data.train_matrix
-    - data.train_labels
-    - data.test_matrix
-    - data.true_labels
-    - data.label_key
+    - data.pre_train_matrix
+    - data.pre_train_labels
+    - data.pre_test_matrix
+    - data.pre_true_labels
+    - data.pre_label_key
     - data.order
   outputs:
-  - id: data.post_stratify_train_matrix
+  - id: data.train_matrix
     path: '{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz'
-  - id: data.post_stratify_train_labels
+  - id: data.train_labels
     path: '{input}/{stage}/{module}/{params}/{dataset}.train.labels.tar.gz'
-  - id: data.post_stratify_test_matrix
+  - id: data.test_matrix
     path: '{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz'
-  - id: data.post_stratify_true_labels
+  - id: data.true_labels
     path: '{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz'
-  - id: data.post_stratify_label_key
+  - id: data.label_key
     path: '{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz'
   - id: data.post_stratify_order
     path: '{input}/{stage}/{module}/{params}/{dataset}.order.json.gz'
 - id: analysis
   inputs:
   - entries:
-    - data.post_stratify_train_matrix
-    - data.post_stratify_train_labels
-    - data.post_stratify_test_matrix
-    - data.post_stratify_label_key
+    - data.train_matrix
+    - data.train_labels
+    - data.test_matrix
+    - data.label_key
   modules:
   - id: dgcytof
     name: DG-CyTOF
@@ -424,8 +424,8 @@ stages:
   inputs:
   - entries:
     - analysis.prediction
-    - data.post_stratify_true_labels
-    - data.post_stratify_label_key
+    - data.true_labels
+    - data.label_key
     - data.post_stratify_order
   outputs:
   - id: metrics.scores
