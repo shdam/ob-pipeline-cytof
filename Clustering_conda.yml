@@ -238,7 +238,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-preprocessing
-      commit: 729792468867acffde3243c2123fcadadefa8de1
+      commit: df7618098737143f7b84f0b28a37318da310eb63
     parameters:
     - values:
       - --num
@@ -297,7 +297,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-stratify.git
-      commit: 800468bdcc2fd6a4660efc04e29fc60b6775057d
+      commit: 85ad6485f3fb4395a19502f479ad7476923d790a
     parameters:
     - values:
       - --drop-ungated-training
