@@ -57,6 +57,7 @@ metric_collectors:
       commit: b59741c242413925834ebc086531890b1f5e0963
     inputs:
       - metrics.scores
+      - data.metadata
     outputs:
       - id: metrics.report
         path: "{input}/metric_collectors/metrics_report/metrics_report.html"
@@ -141,8 +142,8 @@ stages:
     outputs:
       - id: data.raw
         path: "{input}/{stage}/{module}/{params}/data_raw.data.tar.gz"
-      - id: data.order
-        path: "{input}/{stage}/{module}/{params}/data_raw.order.json.gz"
+      - id: data.import_metadata
+        path: "{input}/{stage}/{module}/{params}/{dataset}.data_raw.metadata.json.gz"
   - id: preprocessing
     modules:
       - id: data_preprocessing
@@ -178,9 +179,9 @@ stages:
               - --name
               - data_import.data_preprocessing
     inputs:
-        - entries:
+      - entries:
           - data.raw
-          - data.order
+          - data.import_metadata
     outputs:
       - id: data.pre_train_matrix
         path: "{input}/{stage}/{module}/{params}/data_preprocessing.train.matrix.tar.gz"
@@ -190,8 +191,8 @@ stages:
         path: "{input}/{stage}/{module}/{params}/data_preprocessing.test.matrices.tar.gz"
       - id: data.pre_true_labels
         path: "{input}/{stage}/{module}/{params}/data_preprocessing.test.labels.tar.gz"
-      - id: data.pre_label_key
-        path: "{input}/{stage}/{module}/{params}/data_preprocessing.label_key.json.gz"
+      - id: data.pre_metadata
+        path: "{input}/{stage}/{module}/{params}/{dataset}.data_preprocessing.metadata.json.gz"
   - id: stratify
     modules:
       - id: data_stratify
@@ -222,8 +223,7 @@ stages:
           - data.pre_train_labels
           - data.pre_test_matrix
           - data.pre_true_labels
-          - data.pre_label_key
-          - data.order
+          - data.pre_metadata
     outputs:
       - id: data.train_matrix
         path: "{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz"
@@ -233,17 +233,15 @@ stages:
         path: "{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz"
       - id: data.true_labels
         path: "{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz"
-      - id: data.label_key
-        path: "{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz"
-      - id: data.post_stratify_order
-        path: "{input}/{stage}/{module}/{params}/{dataset}.order.json.gz"
+      - id: data.metadata
+        path: "{input}/{stage}/{module}/{params}/{dataset}.metadata.json.gz"
   - id: analysis
     inputs:
-      - entries:
+        - entries:
           - data.train_matrix
           - data.train_labels
           - data.test_matrix
-          - data.label_key
+          - data.metadata
     modules:
       - id: dgcytof
         name: DG-CyTOF
@@ -313,11 +311,10 @@ stages:
               - --metric
               - all
     inputs:
-      - entries:
+        - entries:
           - analysis.prediction
           - data.true_labels
-          - data.label_key
-          - data.post_stratify_order
+          - data.metadata
     outputs:
       - id: metrics.scores
         path: "{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz"
