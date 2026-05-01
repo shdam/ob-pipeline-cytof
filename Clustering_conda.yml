@@ -309,7 +309,7 @@ stages:
   modules:
   - id: dgcytof
     name: DG-CyTOF
-    software_environment: dgcytof
+    software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-dgcytof
       commit: caba3a4b82e9e9c71354ab53f3d9050a052ddfbf
