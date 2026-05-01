@@ -217,7 +217,7 @@ stages:
               - --drop-ungated-test
               - "true"
     inputs:
-      - entries:
+        - entries:
           - data.train_matrix
           - data.train_labels
           - data.test_matrix
