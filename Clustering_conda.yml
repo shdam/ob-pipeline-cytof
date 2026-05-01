@@ -54,7 +54,7 @@ metric_collectors:
   software_environment: metrics_r
   repository:
     url: https://github.com/kaae-2/ob-metrics-collectors.git
-    commit: e54a4df6bf5ced0b650cdb7666ecb6cd31c98568
+    commit: 7ebd10507a1cd49666e14ac6f2dc08690ecfedb9
   inputs:
   - metrics.scores
   - data.order
@@ -71,7 +71,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-data
-      commit: 6c77d6939ca4297341da4101bf44463ca9c06ecd
+      commit: d3a7817c458b0810b13c954cae707daf7a92aa1f
     parameters:
     - values:
       - --dataset_name
@@ -238,7 +238,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-preprocessing
-      commit: 0e6c931555e053ab5c42440345bf58b0f6b08358
+      commit: d81de1b2c814185574cdb870660cf99d0739f240
     parameters:
     - values:
       - --num
@@ -297,7 +297,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-stratify.git
-      commit: ced6d66b1f5206aa5323b9bdc2d1afe37981b290
+      commit: 5e563febf1a198301a0ee5e6bfc5a5127d8bafd1
     parameters:
     - values:
       - --drop-ungated-training
@@ -355,7 +355,7 @@ stages:
     software_environment: bash
     repository:
       url: https://github.com/kaae-2/ob-pipeline-CyGATE
-      commit: 673e7292da363a8b3e53cc57b6c739e5e321adc9
+      commit: 0bedebd25902670ac71f604067491fe49ba53946
   - id: random
     name: Random
     software_environment: cran
@@ -368,28 +368,28 @@ stages:
     software_environment: cyanno
     repository:
       url: https://github.com/kaae-2/ob-pipeline-cyanno
-      commit: 0c3610615b832012518ec48a9ec513619d0dab67
+      commit: fcf2834132d0e11cef92a2e845e7dee3b011f006
     parameters: []
   - id: knn
     name: KNN
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-knn
-      commit: 24d7e1d0960aa860bec8e1acca6b286894528926
+      commit: 083f1b497e7e6e54ead84955faca5e6a01e846e2
     parameters: []
   - id: lda
     name: LDA
     software_environment: cran
     repository:
       url: https://github.com/kaae-2/ob-pipeline-LDA
-      commit: 120175fcb280263c71e5d91c27658073c2d96c28
+      commit: 57cbfad5b83c833f2a9043c3e1d41b72dc19e7f8
     parameters: []
   - id: gatemeclass
     name: GateMeClass
     software_environment: gatemeclass
     repository:
       url: https://github.com/kaae-2/GateMeClass_model
-      commit: fc605c556f1f034559cce90f2bcdbb82d35427f0
+      commit: 8161931b551af03a79eddd9e8b9f02204d35b3b3
     parameters:
     - values:
       - --GMM_parameterization
@@ -419,7 +419,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-metrics
-      commit: 4e58b8b03ff22d5477ae1099e792fe657ee296ca
+      commit: a4fafa55dc2b030b72197d3bb03cd92a2b2d59de
     parameters: []
   inputs:
   - entries:
