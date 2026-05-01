@@ -81,6 +81,8 @@ stages:
               - "5"
               - --potential-batches
               - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - FR-FCM-Z2KP-covid
@@ -90,6 +92,8 @@ stages:
               - "5"
               - --potential-batches
               - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - FR-FCM-Z238
@@ -99,6 +103,8 @@ stages:
               - "5"
               - --potential-batches
               - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - FR-FCM-Z3YR
@@ -108,6 +114,8 @@ stages:
               - "5"
               - --potential-batches
               - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - Samusik
@@ -117,6 +125,8 @@ stages:
               - "5"
               - --potential-batches
               - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - Transformed
@@ -126,11 +136,13 @@ stages:
               - "5"
               - --potential-batches
               - "1"
+              - --name
+              - data_import.data_raw
     outputs:
       - id: data.raw
-        path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
+        path: "{input}/{stage}/{module}/{params}/data_raw.data.tar.gz"
       - id: data.order
-        path: "{input}/{stage}/{module}/{params}/{dataset}.data.order.json.gz"
+        path: "{input}/{stage}/{module}/{params}/data_raw.order.json.gz"
   - id: preprocessing
     modules:
       - id: data_preprocessing
@@ -143,33 +155,43 @@ stages:
           - values:
               - --num
               - "1"
+              - --name
+              - data_import.data_preprocessing
           - values:
               - --num
               - "2"
+              - --name
+              - data_import.data_preprocessing
           - values:
               - --num
               - "3"
+              - --name
+              - data_import.data_preprocessing
           - values:
               - --num
               - "4"
+              - --name
+              - data_import.data_preprocessing
           - values:
               - --num
               - "5"
+              - --name
+              - data_import.data_preprocessing
     inputs:
         - entries:
           - data.raw
           - data.order
     outputs:
       - id: data.train_matrix
-        path: "{input}/{stage}/{module}/{params}/{dataset}.preprocessed.train.matrix.tar.gz"
+        path: "{input}/{stage}/{module}/{params}/data_preprocessing.train.matrix.tar.gz"
       - id: data.train_labels
-        path: "{input}/{stage}/{module}/{params}/{dataset}.preprocessed.train.labels.tar.gz"
+        path: "{input}/{stage}/{module}/{params}/data_preprocessing.train.labels.tar.gz"
       - id: data.test_matrix
-        path: "{input}/{stage}/{module}/{params}/{dataset}.preprocessed.test.matrices.tar.gz"
+        path: "{input}/{stage}/{module}/{params}/data_preprocessing.test.matrices.tar.gz"
       - id: data.true_labels
-        path: "{input}/{stage}/{module}/{params}/{dataset}.preprocessed.test.labels.tar.gz"
+        path: "{input}/{stage}/{module}/{params}/data_preprocessing.test.labels.tar.gz"
       - id: data.label_key
-        path: "{input}/{stage}/{module}/{params}/{dataset}.preprocessed.label_key.json.gz"
+        path: "{input}/{stage}/{module}/{params}/data_preprocessing.label_key.json.gz"
   - id: stratify
     modules:
       - id: data_stratify
