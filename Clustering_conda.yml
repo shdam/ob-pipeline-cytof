@@ -345,7 +345,7 @@ stages:
     software_environment: py
     repository:
       url: https://github.com/kaae-2/ob-pipeline-dgcytof
-      commit: eb4fd7288f85bfa15abff9ad5c1f313f4c9dee8d
+      commit: 6407f630e10d4e58faf4e3e51f0032ffcc87f181
     parameters: []
   - id: cygate
     name: CyGATE
