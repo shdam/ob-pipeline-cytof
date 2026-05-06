@@ -19,7 +19,7 @@ and metrics collection.
 
 Data flow:
 
-1. `data` -> `{name}.data.tar.gz`, `{name}.order.json.gz`, attachments
+1. `data` -> `{name}.data.tar.gz`, `{name}.metadata.json.gz`, attachments
 2. `preprocessing` -> train/test matrix + label tarballs + `label_key`
 3. `analysis` -> `{model}_predicted_labels.tar.gz`
 4. `metrics` -> `{name}.flow_metrics.json.gz`
@@ -135,7 +135,7 @@ stages:
           - data.train_matrix
           - data.train_labels
           - data.test_matrix
-          - data.label_key
+          - data.metadata
     modules:
       - id: my_tool
         name: My Tool
@@ -159,7 +159,7 @@ Tool implementation contract (analysis stage):
   - `--data.train_matrix`
   - `--data.train_labels`
   - `--data.test_matrix`
-  - `--data.label_key`
+  - `--data.metadata`
 - Configurable inputs:
   - anything you add under `modules[].parameters[].values` (for example
     `--some-param value`)
@@ -179,7 +179,7 @@ python run_my_tool.py \
   --data.train_matrix out/data/data_preprocessing/default/data_import.train.matrix.tar.gz \
   --data.train_labels out/data/data_preprocessing/default/data_import.train.labels.tar.gz \
   --data.test_matrix out/data/data_preprocessing/default/data_import.test.matrices.tar.gz \
-  --data.label_key out/data/data_preprocessing/default/data_import.label_key.json.gz \
+  --data.metadata out/data/data_preprocessing/default/data_import.metadata.json.gz \
   --some-param value
 ```
 

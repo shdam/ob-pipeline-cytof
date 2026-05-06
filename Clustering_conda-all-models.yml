@@ -57,6 +57,7 @@ metric_collectors:
       commit: b59741c242413925834ebc086531890b1f5e0963
     inputs:
       - metrics.scores
+      - data.metadata
     outputs:
       - id: metrics.report
         path: "{input}/metric_collectors/metrics_report/metrics_report.html"
@@ -77,36 +78,72 @@ stages:
               - FR-FCM-Z2KP-healthy
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - FR-FCM-Z2KP-covid
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - FR-FCM-Z238
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - FR-FCM-Z3YR
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - Samusik
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
           - values:
               - --dataset_name
               - Transformed
               - --seed
               - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
     outputs:
       - id: data.raw
-        path: "{input}/{stage}/{module}/{params}/{dataset}.data.tar.gz"
-      - id: data.order
-        path: "{input}/{stage}/{module}/{params}/{dataset}.order.json.gz"
+        path: "{input}/{stage}/{module}/{params}/data_raw.data.tar.gz"
+      - id: data.import_metadata
+        path: "{input}/{stage}/{module}/{params}/{dataset}.data_raw.metadata.json.gz"
   - id: preprocessing
     modules:
       - id: data_preprocessing
@@ -119,22 +156,74 @@ stages:
           - values:
               - --num
               - "1"
+              - --name
+              - data_import.data_preprocessing
           - values:
               - --num
               - "2"
+              - --name
+              - data_import.data_preprocessing
           - values:
               - --num
               - "3"
+              - --name
+              - data_import.data_preprocessing
           - values:
               - --num
               - "4"
+              - --name
+              - data_import.data_preprocessing
           - values:
               - --num
               - "5"
+              - --name
+              - data_import.data_preprocessing
+    inputs:
+      - entries:
+          - data.raw
+          - data.import_metadata
+    outputs:
+      - id: data.pre_train_matrix
+        path: "{input}/{stage}/{module}/{params}/data_preprocessing.train.matrix.tar.gz"
+      - id: data.pre_train_labels
+        path: "{input}/{stage}/{module}/{params}/data_preprocessing.train.labels.tar.gz"
+      - id: data.pre_test_matrix
+        path: "{input}/{stage}/{module}/{params}/data_preprocessing.test.matrices.tar.gz"
+      - id: data.pre_true_labels
+        path: "{input}/{stage}/{module}/{params}/data_preprocessing.test.labels.tar.gz"
+      - id: data.pre_metadata
+        path: "{input}/{stage}/{module}/{params}/{dataset}.data_preprocessing.metadata.json.gz"
+  - id: stratify
+    modules:
+      - id: data_stratify
+        name: Stratify preprocessed CyTOF datasets
+        software_environment: py
+        repository:
+          url: https://github.com/kaae-2/ob-stratify.git
+          commit: 3335516d48b84345cf13715efc02ef53e030519c
+        parameters:
+          - values:
+              - --drop-ungated-training
+              - "false"
+              - --drop-ungated-test
+              - "false"
+          - values:
+              - --drop-ungated-training
+              - "false"
+              - --drop-ungated-test
+              - "true"
+          - values:
+              - --drop-ungated-training
+              - "true"
+              - --drop-ungated-test
+              - "true"
     inputs:
         - entries:
-          - data.raw
-          - data.order
+          - data.pre_train_matrix
+          - data.pre_train_labels
+          - data.pre_test_matrix
+          - data.pre_true_labels
+          - data.pre_metadata
     outputs:
       - id: data.train_matrix
         path: "{input}/{stage}/{module}/{params}/{dataset}.train.matrix.tar.gz"
@@ -144,18 +233,19 @@ stages:
         path: "{input}/{stage}/{module}/{params}/{dataset}.test.matrices.tar.gz"
       - id: data.true_labels
         path: "{input}/{stage}/{module}/{params}/{dataset}.test.labels.tar.gz"
-      - id: data.label_key
-        path: "{input}/{stage}/{module}/{params}/{dataset}.label_key.json.gz"
+      - id: data.metadata
+        path: "{input}/{stage}/{module}/{params}/{dataset}.metadata.json.gz"
   - id: analysis
     inputs:
-      - entries:
+        - entries:
           - data.train_matrix
           - data.train_labels
           - data.test_matrix
+          - data.metadata
     modules:
       - id: dgcytof
         name: DG-CyTOF
-        software_environment: dgcytof
+        software_environment: py
         repository:
           url: https://github.com/kaae-2/ob-pipeline-dgcytof
           commit: 5e5cc8c0bbb01834311e3af402bc32a6aac9160d
@@ -221,10 +311,10 @@ stages:
               - --metric
               - all
     inputs:
-      - entries:
+        - entries:
           - analysis.prediction
           - data.true_labels
-          - data.label_key
+          - data.metadata
     outputs:
       - id: metrics.scores
         path: "{input}/{stage}/{module}/{params}/{dataset}.flow_metrics.json.gz"
