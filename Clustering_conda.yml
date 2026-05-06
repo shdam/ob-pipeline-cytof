@@ -40,6 +40,10 @@ software_environments:
     description: Deepcytof environment
     conda: envs/deepcytof.yml
     envmodule: deepcytof
+  cydefine:
+    description: cyDefine environment
+    conda: envs/cydefine.yml
+    envmodule: cydefine
   bash:
     description: Bash environment
     conda: envs/bash.yml
@@ -367,6 +371,16 @@ stages:
           url: https://github.com/kaae-2/ob-pipeline-cyanno
           commit: c7e0e07ddc5a446931aa6b32efa6e1e41670a980
         parameters: []
+      - id: cydefine
+        name: cyDefine
+        software_environment: cydefine
+        repository:
+          url: https://github.com/shdam/ob-pipeline-cydefine
+          commit: ca0eb166841dbb5f887fec677f44cc52e0e919df
+        parameters: 
+          - values: 
+            - --seed
+            - '332'
       - id: knn
         name: KNN
         software_environment: py
