@@ -57,9 +57,8 @@ metric_collectors:
     name: Metrics report collector
     software_environment: metrics_r
     repository:
-      url: https://github.com/kaae-2/ob-pipeline-cyanno
-      commit: 947cba371e587d3aec21fbe4fd476eca9d4f3a0e
-    parameters: []
+      url: https://github.com/kaae-2/ob-metrics-collectors.git
+      commit: 3539bda85b96f5339bd9e616faa7377d3037a5ce
     inputs:
       - metrics.scores
       - data.metadata
