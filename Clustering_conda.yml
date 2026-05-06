@@ -248,7 +248,9 @@ stages:
       url: https://github.com/shdam/ob-pipeline-cydefine
       commit: ca0eb166841dbb5f887fec677f44cc52e0e919df
     parameters: 
-      - values: ["--seed 332"]
+      - values: 
+        - --seed
+        - '332'
   - id: knn
     name: KNN
     software_environment: py
