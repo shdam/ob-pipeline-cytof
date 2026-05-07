@@ -108,6 +108,8 @@ dependencies:
   - pixman=0.46.4
   - pthread-stubs=0.4
   - python=3.12.6
+  - pydantic>=2.6
+  - pydantic-core>=2.16
   - r-argparse=2.3.1
   - r-askpass=1.2.1
   - r-assertthat=0.2.1
@@ -281,8 +283,6 @@ dependencies:
   - pip:
       - "omnibenchmark==0.3.2"
       - "snakemake==9.14.8"
-      - "pydantic>=2.6"
-      - "pydantic-core>=2.16"
       - "linkml-runtime"
       - "curies"
       - "prefixmaps"

@@ -10,6 +10,8 @@ dependencies:
   - conda-forge::pytorch=2.3.1
   - conda-forge::torchvision=0.18.1
   - conda-forge::hdbscan=0.8.38
+  - conda-forge::pydantic>=2.6
+  - conda-forge::pydantic-core>=2.16
   - pip:
       #- "clustering-benchmarks==1.1.5"
       - "https://github.com/gagolews/clustering-benchmarks/releases/download/v1.1.5/clustering_benchmarks-1.1.5.tar.gz"
@@ -30,8 +32,6 @@ dependencies:
       - "scikit-learn==1.5.2"
       - "scikit-plot==0.3.7"
       - "tensorboard==2.3.0"
-      - "pydantic>=2.6"
-      - "pydantic-core>=2.16"
       - "linkml-runtime"
       - "curies"
       - "prefixmaps"
