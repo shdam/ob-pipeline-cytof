@@ -13,6 +13,8 @@ dependencies:
   - pip:
       #- "clustering-benchmarks==1.1.5"
       - "https://github.com/gagolews/clustering-benchmarks/releases/download/v1.1.5/clustering_benchmarks-1.1.5.tar.gz"
+      - "omnibenchmark==0.3.2"
+      - "snakemake==9.14.8"
       - "flowkit"
       - "wget"
       - "fastcluster==1.2.6"
