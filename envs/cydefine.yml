@@ -2,21 +2,19 @@ name: cydefine
 channels:
   - conda-forge
   - bioconda
+  - r
   - nodefaults
 dependencies:
-  # Python worker stack used by omnibenchmark's Snakemake runner.
+  # Snakemake executes omnibenchmark's Python runner inside this env.
   - conda-forge::python=3.12.6
-  - conda-forge::pip
-  - conda-forge::pydantic>=2.6
-  - conda-forge::pydantic-core>=2.16
-  - conda-forge::pyyaml
+  - conda-forge::pydantic=2.12.5
+  - conda-forge::pydantic-core=2.41.5
 
-  # Build/runtime tools for installing cyDefine and cyCombine from GitHub.
+  # Runtime tools for remotes::install_github().
   - conda-forge::git
   - conda-forge::make
-  - conda-forge::sed
 
-  # CRAN/Bioc packages directly used by the wrapper or imported by cyDefine/cyCombine.
+  # Direct wrapper imports plus cyDefine/cyCombine Imports fields.
   - conda-forge::r-base=4.5.2
   - conda-forge::r-remotes
   - conda-forge::r-argparse
@@ -38,15 +36,3 @@ dependencies:
   - conda-forge::r-kohonen
   - conda-forge::r-readxl
   - bioconda::bioconductor-sva
-
-  - pip:
-      - "omnibenchmark==0.3.2"
-      - "snakemake==9.14.8"
-      - "linkml-runtime"
-      - "curies"
-      - "prefixmaps"
-      - "prefixcommons"
-      - "rdflib"
-      - "pyparsing"
-      - "isodate"
-      - "webencodings"
