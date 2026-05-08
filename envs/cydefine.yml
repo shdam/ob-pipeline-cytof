@@ -4,35 +4,41 @@ channels:
   - bioconda
   - nodefaults
 dependencies:
-  - python=3.12.6
-  - pip
-  - pydantic>=2.6
-  - pydantic-core>=2.16
-  - git
-  - make
-  - sed
-  - r-base=4.5.2
-  - r-remotes
-  - r-argparse
-  - r-glue
-  - r-data.table
-  - r-readr
-  - r-dplyr
-  - r-jsonlite
-  - r-ranger
-  - r-tibble
-  - r-stringr
-  - r-tidyr
-  - r-ggplot2
-  - r-rcolorbrewer
-  - r-igraph
-  - r-pbmcapply
-  - r-matrixcalc
-  - r-magrittr
-  - r-kohonen
-  - r-readxl
-  - bioconductor-sva
-  - bioconductor-flowcore
+  # Python worker stack used by omnibenchmark's Snakemake runner.
+  - conda-forge::python=3.12.6
+  - conda-forge::pip
+  - conda-forge::pydantic>=2.6
+  - conda-forge::pydantic-core>=2.16
+  - conda-forge::pyyaml
+
+  # Build/runtime tools for installing cyDefine and cyCombine from GitHub.
+  - conda-forge::git
+  - conda-forge::make
+  - conda-forge::sed
+
+  # CRAN/Bioc packages directly used by the wrapper or imported by cyDefine/cyCombine.
+  - conda-forge::r-base=4.5.2
+  - conda-forge::r-remotes
+  - conda-forge::r-argparse
+  - conda-forge::r-glue
+  - conda-forge::r-data.table
+  - conda-forge::r-readr
+  - conda-forge::r-dplyr
+  - conda-forge::r-jsonlite
+  - conda-forge::r-ranger
+  - conda-forge::r-tibble
+  - conda-forge::r-stringr
+  - conda-forge::r-tidyr
+  - conda-forge::r-ggplot2
+  - conda-forge::r-rcolorbrewer
+  - conda-forge::r-igraph
+  - conda-forge::r-pbmcapply
+  - conda-forge::r-matrixcalc
+  - conda-forge::r-magrittr
+  - conda-forge::r-kohonen
+  - conda-forge::r-readxl
+  - bioconda::bioconductor-sva
+
   - pip:
       - "omnibenchmark==0.3.2"
       - "snakemake==9.14.8"
@@ -40,3 +46,7 @@ dependencies:
       - "curies"
       - "prefixmaps"
       - "prefixcommons"
+      - "rdflib"
+      - "pyparsing"
+      - "isodate"
+      - "webencodings"
