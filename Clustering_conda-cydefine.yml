@@ -376,7 +376,7 @@ stages:
         software_environment: cydefine
         repository:
           url: https://github.com/kaae-2/ob-pipeline-cydefine
-          commit: 34dcb8b6c56504981cfbfefee8a947fea25c2820
+          commit: e0003d528fae7e44890da95a2315e683124f7ceb
         parameters:
           - values:
               - --seed
