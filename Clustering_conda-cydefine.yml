@@ -88,148 +88,148 @@ stages:
               - "1"
               - --name
               - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - FR-FCM-Z2KP-covid
-          #     - --seed
-          #     - "42"
-          #     - --transformation-cofactor
-          #     - "150"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - FR-FCM-Z238
-          #     - --seed
-          #     - "42"
-          #     - --transformation-cofactor
-          #     - "5"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - FR-FCM-Z3YR
-          #     - --seed
-          #     - "42"
-          #     - --transformation-cofactor
-          #     - "5"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - Samusik
-          #     - --seed
-          #     - "42"
-          #     - --transformation-cofactor
-          #     - "5"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - BodenmillerXL
-          #     - --seed
-          #     - "42"
-          #     - --transformation-cofactor
-          #     - "5"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - Levine
-          #     - --seed
-          #     - "42"
-          #     - --transformation-cofactor
-          #     - "5"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - FlowCyt
-          #     - --seed
-          #     - "42"
-          #     - --transformation-cofactor
-          #     - "150"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - FR-FCM-Z2KP-healthy
-          #     - --seed
-          #     - "420"
-          #     - --sub-sampling
-          #     - "1000"
-          #     - --transformation-cofactor
-          #     - "150"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - FR-FCM-Z2KP-healthy
-          #     - --seed
-          #     - "420"
-          #     - --sub-sampling
-          #     - "5000"
-          #     - --transformation-cofactor
-          #     - "150"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - FR-FCM-Z2KP-healthy
-          #     - --seed
-          #     - "420"
-          #     - --sub-sampling
-          #     - "10000"
-          #     - --transformation-cofactor
-          #     - "150"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - FR-FCM-Z2KP-healthy
-          #     - --seed
-          #     - "420"
-          #     - --sub-sampling
-          #     - "50000"
-          #     - --transformation-cofactor
-          #     - "150"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
-          # - values:
-          #     - --dataset_name
-          #     - FR-FCM-Z2KP-healthy
-          #     - --seed
-          #     - "420"
-          #     - --sub-sampling
-          #     - "100000"
-          #     - --transformation-cofactor
-          #     - "150"
-          #     - --potential-batches
-          #     - "1"
-          #     - --name
-          #     - data_import.data_raw
+          - values:
+              - --dataset_name
+              - FR-FCM-Z2KP-covid
+              - --seed
+              - "42"
+              - --transformation-cofactor
+              - "150"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - FR-FCM-Z238
+              - --seed
+              - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - FR-FCM-Z3YR
+              - --seed
+              - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - Samusik
+              - --seed
+              - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - BodenmillerXL
+              - --seed
+              - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - Levine
+              - --seed
+              - "42"
+              - --transformation-cofactor
+              - "5"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - FlowCyt
+              - --seed
+              - "42"
+              - --transformation-cofactor
+              - "150"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - FR-FCM-Z2KP-healthy
+              - --seed
+              - "420"
+              - --sub-sampling
+              - "1000"
+              - --transformation-cofactor
+              - "150"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - FR-FCM-Z2KP-healthy
+              - --seed
+              - "420"
+              - --sub-sampling
+              - "5000"
+              - --transformation-cofactor
+              - "150"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - FR-FCM-Z2KP-healthy
+              - --seed
+              - "420"
+              - --sub-sampling
+              - "10000"
+              - --transformation-cofactor
+              - "150"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - FR-FCM-Z2KP-healthy
+              - --seed
+              - "420"
+              - --sub-sampling
+              - "50000"
+              - --transformation-cofactor
+              - "150"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
+          - values:
+              - --dataset_name
+              - FR-FCM-Z2KP-healthy
+              - --seed
+              - "420"
+              - --sub-sampling
+              - "100000"
+              - --transformation-cofactor
+              - "150"
+              - --potential-batches
+              - "1"
+              - --name
+              - data_import.data_raw
     outputs:
       - id: data.raw
         path: "{input}/{stage}/{module}/{params}/data_raw.data.tar.gz"
